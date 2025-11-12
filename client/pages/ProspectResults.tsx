@@ -2490,6 +2490,19 @@ export default function ProspectResults() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Add to List Dialog */}
+        <AddToListDialog
+          open={addToListDialog.open}
+          onOpenChange={(open) =>
+            setAddToListDialog((prev) => ({ ...prev, open }))
+          }
+          prospectId={addToListDialog.prospectId}
+          prospectName={addToListDialog.prospectName}
+          lists={lists}
+          onListCreated={handleListCreated}
+          onProspectAdded={handleProspectAdded}
+        />
       </DashboardLayout>
     </TooltipProvider>
   );
