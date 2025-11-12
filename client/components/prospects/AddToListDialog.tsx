@@ -38,9 +38,11 @@ export default function AddToListDialog({
   onOpenChange,
   prospectId,
   prospectName,
+  prospectIds,
   lists,
   onListCreated,
   onProspectAdded,
+  onProspectsAdded,
 }: AddToListDialogProps) {
   const { toast } = useToast();
 
