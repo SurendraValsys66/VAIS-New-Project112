@@ -913,6 +913,48 @@ export default function WishlistProspectDetails() {
                           </div>
                         </TableHead>
                       )}
+                      {columnVisibility.revenue && (
+                        <TableHead
+                          className="cursor-pointer hover:bg-gray-100 transition-colors"
+                          onClick={() => handleSort("revenue")}
+                        >
+                          <div className="flex items-center justify-between">
+                            Revenue
+                            <div className="ml-2">
+                              {sortField === "revenue" ? (
+                                sortDirection === "asc" ? (
+                                  <ArrowUp className="w-3 h-3 text-valasys-orange" />
+                                ) : (
+                                  <ArrowDown className="w-3 h-3 text-valasys-orange" />
+                                )
+                              ) : (
+                                <ArrowUpDown className="w-3 h-3 text-gray-400" />
+                              )}
+                            </div>
+                          </div>
+                        </TableHead>
+                      )}
+                      {columnVisibility.mainIndustry && (
+                        <TableHead
+                          className="cursor-pointer hover:bg-gray-100 transition-colors"
+                          onClick={() => handleSort("industry")}
+                        >
+                          <div className="flex items-center justify-between">
+                            Main Industry
+                            <div className="ml-2">
+                              {sortField === "industry" ? (
+                                sortDirection === "asc" ? (
+                                  <ArrowUp className="w-3 h-3 text-valasys-orange" />
+                                ) : (
+                                  <ArrowDown className="w-3 h-3 text-valasys-orange" />
+                                )
+                              ) : (
+                                <ArrowUpDown className="w-3 h-3 text-gray-400" />
+                              )}
+                            </div>
+                          </div>
+                        </TableHead>
+                      )}
                       {columnVisibility.country && (
                         <TableHead
                           className="cursor-pointer hover:bg-gray-100 transition-colors"
@@ -933,6 +975,9 @@ export default function WishlistProspectDetails() {
                             </div>
                           </div>
                         </TableHead>
+                      )}
+                      {columnVisibility.contactInfo && (
+                        <TableHead>Contact Info</TableHead>
                       )}
                       {columnVisibility.actions && (
                         <TableHead className="w-16">Actions</TableHead>
