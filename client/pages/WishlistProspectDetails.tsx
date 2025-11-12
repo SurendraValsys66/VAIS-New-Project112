@@ -1026,11 +1026,17 @@ export default function WishlistProspectDetails() {
                                 <Building className="w-4 h-4 mr-1 text-gray-400" />
                                 {prospect.companyName}
                               </div>
+                              <div className="text-sm text-gray-500">
+                                {prospect.industry}
+                              </div>
+                              <div className="text-xs text-gray-400 mt-1">
+                                {prospect.companySize} • {prospect.revenue}
+                              </div>
                             </TableCell>
                           )}
                           {columnVisibility.jobTitle && (
                             <TableCell>
-                              <div className="text-sm text-gray-900">
+                              <div className="text-sm text-gray-900 font-medium">
                                 {prospect.jobTitle}
                               </div>
                             </TableCell>
@@ -1042,11 +1048,50 @@ export default function WishlistProspectDetails() {
                               </div>
                             </TableCell>
                           )}
+                          {columnVisibility.revenue && (
+                            <TableCell>
+                              <div className="text-sm text-gray-900">
+                                {prospect.revenue}
+                              </div>
+                            </TableCell>
+                          )}
+                          {columnVisibility.mainIndustry && (
+                            <TableCell>
+                              <div className="text-sm text-gray-900">
+                                {prospect.industry}
+                              </div>
+                            </TableCell>
+                          )}
                           {columnVisibility.country && (
                             <TableCell>
                               <div className="flex items-center text-sm text-gray-900">
                                 <MapPin className="w-4 h-4 mr-1 text-gray-400" />
                                 {prospect.country}
+                              </div>
+                            </TableCell>
+                          )}
+                          {columnVisibility.contactInfo && (
+                            <TableCell>
+                              <div className="flex items-center space-x-2">
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
+                                      className="h-8 w-8 p-0"
+                                      onClick={() => {
+                                        navigator.clipboard.writeText(prospect.email);
+                                        toast({
+                                          title: "Copied",
+                                          description: "Email copied to clipboard",
+                                        });
+                                      }}
+                                    >
+                                      <Mail className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent>{prospect.email}</TooltipContent>
+                                </Tooltip>
                               </div>
                             </TableCell>
                           )}
