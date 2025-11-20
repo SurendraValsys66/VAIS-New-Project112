@@ -352,8 +352,8 @@ export function AddPaymentMethodDialog({
                       maxLength={19}
                     />
                     {cardNetwork && (
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 animate-fade-in">
-                        <div className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg text-xs font-bold text-white shadow-lg">
+                      <div className="absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 animate-fade-in">
+                        <div className="px-2 md:px-3 py-1 md:py-1.5 bg-gradient-to-r from-valasys-orange to-valasys-orange-light rounded-lg text-xs font-bold text-white shadow-lg">
                           {cardNetwork}
                         </div>
                       </div>
