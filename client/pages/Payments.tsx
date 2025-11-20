@@ -605,16 +605,25 @@ export default function Payments() {
 
   const handleAddPaymentMethod = (method: PaymentMethod) => {
     setPaymentMethodsList((prev) => {
+      if (editingMethod) {
+        return prev.map((pm) => (pm.id === method.id ? method : pm));
+      }
+
       const isFirstCard = prev.length === 0;
       const newMethod = isFirstCard
         ? { ...method, isDefault: true, autopayEnabled: true }
         : method;
       return [...prev, newMethod];
     });
+    setEditingMethod(undefined);
   };
 
   const handleEditPaymentMethod = (id: string) => {
-    console.log("Edit payment method:", id);
+    const method = paymentMethodsList.find((pm) => pm.id === id);
+    if (method) {
+      setEditingMethod(method);
+      setAddPaymentDialogOpen(true);
+    }
   };
 
   const HeaderSort = ({
