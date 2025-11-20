@@ -251,10 +251,12 @@ export function AddPaymentMethodDialog({
       <DialogContent className="max-w-lg w-full mx-2 overflow-y-auto max-h-[90vh]">
         <DialogHeader>
           <DialogTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-valasys-orange to-valasys-orange-light bg-clip-text text-transparent">
-            Add Payment Method
+            {isEditMode ? "Edit Payment Method" : "Add Payment Method"}
           </DialogTitle>
           <p className="text-xs md:text-sm text-gray-600 mt-2">
-            Choose your preferred payment method to get started
+            {isEditMode
+              ? "Update your payment method details"
+              : "Choose your preferred payment method to get started"}
           </p>
         </DialogHeader>
 
