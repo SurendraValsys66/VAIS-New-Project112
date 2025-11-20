@@ -501,7 +501,7 @@ export default function Payments() {
   const [sortField, setSortField] = useState<SortField>("transactionDate");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [paymentMethodsList, setPaymentMethodsList] =
-    useState<PaymentMethod[]>(paymentMethods);
+    useState<PaymentMethod[]>([]);
   const [addPaymentDialogOpen, setAddPaymentDialogOpen] = useState(false);
   const [editingMethod, setEditingMethod] = useState<PaymentMethod | undefined>();
 
