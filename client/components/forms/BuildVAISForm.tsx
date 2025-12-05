@@ -1127,7 +1127,7 @@ export default function BuildVAISForm() {
                                     <Info className="w-3 h-3" />
                                   </Button>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-lg bg-white">
+                                <DialogContent className="max-w-lg bg-white [&>button]:hidden">
                                   <div className="flex items-start justify-between gap-3 pb-4 border-b border-valasys-gray-200">
                                     <div>
                                       <DialogTitle className="text-xl font-bold text-valasys-gray-900">
@@ -1138,6 +1138,16 @@ export default function BuildVAISForm() {
                                       </p>
                                     </div>
                                     <div className="flex items-center gap-2 flex-shrink-0">
+                                      <DialogClose asChild>
+                                        <Button
+                                          variant="ghost"
+                                          size="icon"
+                                          className="h-6 w-6 p-0 hover:bg-gray-100 rounded-md"
+                                          aria-label="Close"
+                                        >
+                                          <X className="h-4 w-4" />
+                                        </Button>
+                                      </DialogClose>
                                       <span className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-valasys-orange to-valasys-orange-light text-white text-xs font-semibold whitespace-nowrap">
                                         <Sparkles
                                           className="w-3.5 h-3.5 animate-pulse"
