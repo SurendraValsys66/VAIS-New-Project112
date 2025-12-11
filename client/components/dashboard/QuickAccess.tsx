@@ -228,6 +228,13 @@ export default function QuickAccess({
           <Button
             variant="outline"
             className="flex-1"
+            onClick={onFeedback}
+          >
+            <MessageCircle className="w-4 h-4 mr-2" /> Feedback
+          </Button>
+          <Button
+            variant="outline"
+            className="flex-1"
             onClick={() => onNavigate?.("abm")}
           >
             <Users className="w-4 h-4 mr-2" /> Verify ABM
