@@ -71,16 +71,23 @@ export function VAISFeedbackModal({
                   onClick={() => setRating(star)}
                   onMouseEnter={() => setHoveredRating(star)}
                   onMouseLeave={() => setHoveredRating(null)}
-                  className="transition-all duration-200 hover:scale-110"
+                  className={cn(
+                    "transition-all duration-200 hover:scale-110 p-1.5 rounded-full",
+                    hoveredRating !== null && star <= hoveredRating
+                      ? "bg-yellow-400"
+                      : rating !== null && star <= rating
+                        ? "bg-yellow-400"
+                        : "hover:bg-gray-100",
+                  )}
                   type="button"
                 >
                   <Star
                     className={cn(
                       "w-8 h-8 transition-all duration-200",
                       hoveredRating !== null && star <= hoveredRating
-                        ? "fill-gray-400 text-gray-400"
+                        ? "fill-yellow-400 text-yellow-400"
                         : rating !== null && star <= rating
-                          ? "fill-gray-400 text-gray-400"
+                          ? "fill-yellow-400 text-yellow-400"
                           : "text-gray-300",
                     )}
                   />
