@@ -22,6 +22,19 @@ export function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
+export function createTitleBlock(content = "Click to edit title"): TitleBlock {
+  return {
+    type: "title",
+    id: generateId(),
+    content,
+    fontSize: 32,
+    fontColor: "#000000",
+    backgroundColor: "#ffffff",
+    alignment: "left",
+    fontWeight: "bold",
+  };
+}
+
 export function createTextBlock(content = "Click to edit text"): TextBlock {
   return {
     type: "text",
