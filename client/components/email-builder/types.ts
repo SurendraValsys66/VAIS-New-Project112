@@ -223,6 +223,10 @@ export interface SpacerBlock {
   id: string;
   height: number;
   backgroundColor: string;
+  margin: number;
+  borderWidth: number;
+  borderColor: string;
+  visibility: "all" | "desktop" | "mobile";
 }
 
 export type ContentBlock =
