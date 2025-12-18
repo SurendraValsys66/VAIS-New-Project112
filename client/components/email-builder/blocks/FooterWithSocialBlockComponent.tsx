@@ -160,16 +160,18 @@ export const FooterWithSocialBlockComponent: React.FC<
 
         {/* Subscription Text */}
         <div
-          className="cursor-pointer hover:bg-gray-50 rounded p-2"
-          onClick={() => setEditingField("subscriptionText")}
+          className={`cursor-pointer hover:bg-gray-50 rounded p-2 transition-all ${
+            selectedElement === "subscriptionText" ? "ring-2 ring-valasys-orange" : ""
+          }`}
+          onClick={() => onElementSelect?.("subscriptionText")}
         >
-          {editingField === "subscriptionText" ? (
+          {selectedElement === "subscriptionText" ? (
             <textarea
               value={block.subscriptionText.content}
               onChange={(e) =>
                 handleFieldChange("subscriptionText", "content", e.target.value)
               }
-              onBlur={() => setEditingField(null)}
+              onBlur={() => onElementSelect?.(null)}
               autoFocus
               className="w-full border border-valasys-orange rounded px-2 py-1 text-center"
               style={{
