@@ -195,8 +195,21 @@ export const LandingPageBuilder: React.FC<LandingPageBuilderProps> = ({
             Back
           </Button>
         </div>
-        <BlocksPanel onAddBlock={handleAddBlock} />
+        <BlocksPanel
+          onAddBlock={handleAddBlock}
+          onOpenSectionsPanel={() => setIsSectionsPanelOpen(true)}
+        />
       </div>
+
+      {/* Right Sidebar - Sections Panel (conditional) */}
+      {isSectionsPanelOpen && (
+        <div className="w-80 bg-white border-r border-gray-200 overflow-hidden flex flex-col">
+          <SectionsPanel
+            onSelectTemplate={handleSelectTemplate}
+            onBack={() => setIsSectionsPanelOpen(false)}
+          />
+        </div>
+      )}
 
       {/* Main Editor Area */}
       <div className="flex-1 flex flex-col">
