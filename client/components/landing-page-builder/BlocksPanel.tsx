@@ -15,6 +15,15 @@ import { LandingPageBlock } from "./types";
 
 interface BlocksPanelProps {
   onAddBlock: (block: LandingPageBlock) => void;
+  onSelectBlockVariant?: (variantName: string) => void;
+}
+
+interface BlockVariant {
+  id: string;
+  name: string;
+  description?: string;
+  preview?: string;
+  onCreate: () => LandingPageBlock;
 }
 
 interface BlockItem {
@@ -22,6 +31,7 @@ interface BlockItem {
   label: string;
   icon?: React.ReactNode;
   onCreate: () => LandingPageBlock;
+  variants?: BlockVariant[];
 }
 
 interface SectionGroup {
@@ -30,7 +40,7 @@ interface SectionGroup {
   items: BlockItem[];
 }
 
-export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
+export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock, onSelectBlockVariant }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(["start", "basics", "cms", "elements"]),
@@ -100,16 +110,82 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           id: "sections",
           label: "Sections",
           onCreate: createHeroBlock,
+          variants: [
+            {
+              id: "section-hero",
+              name: "Hero Section",
+              description: "Full width hero with image",
+              onCreate: createHeroBlock,
+            },
+            {
+              id: "section-features",
+              name: "Features",
+              description: "Grid of features",
+              onCreate: createFeaturesBlock,
+            },
+            {
+              id: "section-testimonials",
+              name: "Testimonials",
+              description: "Customer testimonials",
+              onCreate: createTestimonialsBlock,
+            },
+            {
+              id: "section-about",
+              name: "About",
+              description: "About company section",
+              onCreate: createAboutBlock,
+            },
+            {
+              id: "section-contact",
+              name: "Contact",
+              description: "Contact form section",
+              onCreate: createContactFormBlock,
+            },
+            {
+              id: "section-footer",
+              name: "Footer",
+              description: "Footer section",
+              onCreate: createFooterBlock,
+            },
+          ],
         },
         {
           id: "navigation",
           label: "Navigation",
           onCreate: createHeaderBlock,
+          variants: [
+            {
+              id: "nav-header",
+              name: "Header Nav",
+              description: "Top navigation bar",
+              onCreate: createHeaderBlock,
+            },
+            {
+              id: "nav-sticky",
+              name: "Sticky Nav",
+              description: "Sticky navigation",
+              onCreate: createHeaderBlock,
+            },
+          ],
         },
         {
           id: "menus",
           label: "Menus",
           onCreate: createContactFormBlock,
+          variants: [
+            {
+              id: "menu-horizontal",
+              name: "Horizontal Menu",
+              description: "Horizontal menu layout",
+              onCreate: createContactFormBlock,
+            },
+            {
+              id: "menu-vertical",
+              name: "Vertical Menu",
+              description: "Vertical menu layout",
+              onCreate: createContactFormBlock,
+            },
+          ],
         },
       ],
     },
@@ -121,11 +197,39 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           id: "collections",
           label: "Collections",
           onCreate: createFeaturesBlock,
+          variants: [
+            {
+              id: "collection-grid",
+              name: "Grid Collection",
+              description: "Grid layout",
+              onCreate: createFeaturesBlock,
+            },
+            {
+              id: "collection-list",
+              name: "List Collection",
+              description: "List layout",
+              onCreate: createFeaturesBlock,
+            },
+          ],
         },
         {
           id: "fields",
           label: "Fields",
           onCreate: createTestimonialsBlock,
+          variants: [
+            {
+              id: "field-text",
+              name: "Text Field",
+              description: "Text input",
+              onCreate: createTestimonialsBlock,
+            },
+            {
+              id: "field-image",
+              name: "Image Field",
+              description: "Image upload",
+              onCreate: createTestimonialsBlock,
+            },
+          ],
         },
       ],
     },
@@ -229,7 +333,11 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
                     <div key={item.id}>
                       <button
                         onClick={() => {
-                          onAddBlock(item.onCreate());
+                          if (item.variants && item.variants.length > 0) {
+                            toggleItem(item.id);
+                          } else {
+                            onAddBlock(item.onCreate());
+                          }
                         }}
                         className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-valasys-orange transition-colors"
                       >
@@ -237,8 +345,35 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
                           {getIcon(item.id)}
                           <span>{item.label}</span>
                         </div>
-                        <ChevronRight className="w-4 h-4 text-gray-300" />
+                        {item.variants && item.variants.length > 0 ? (
+                          expandedItems.has(item.id) ? (
+                            <ChevronDown className="w-4 h-4 text-gray-300" />
+                          ) : (
+                            <ChevronRight className="w-4 h-4 text-gray-300" />
+                          )
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-gray-300" />
+                        )}
                       </button>
+
+                      {item.variants && expandedItems.has(item.id) && (
+                        <div className="bg-gray-50 border-t border-gray-100">
+                          {item.variants.map((variant) => (
+                            <button
+                              key={variant.id}
+                              onClick={() => {
+                                onAddBlock(variant.onCreate());
+                              }}
+                              className="w-full text-left px-8 py-2 text-xs text-gray-600 hover:bg-white hover:text-valasys-orange transition-colors border-b border-gray-100 last:border-b-0"
+                            >
+                              <div className="font-medium">{variant.name}</div>
+                              {variant.description && (
+                                <div className="text-gray-400 text-xs mt-0.5">{variant.description}</div>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
