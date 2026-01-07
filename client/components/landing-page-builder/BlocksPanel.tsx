@@ -309,7 +309,9 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({
   };
 
   const handleItemClick = (item: BlockItem) => {
-    if (item.variants && item.variants.length > 0) {
+    if (item.id === "sections") {
+      onOpenSectionsPanel?.();
+    } else if (item.variants && item.variants.length > 0) {
       toggleItem(item.id);
     } else {
       onAddBlock(item.onCreate());
