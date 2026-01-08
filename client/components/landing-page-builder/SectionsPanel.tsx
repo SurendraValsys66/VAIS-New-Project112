@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LandingPageBlock } from "./types";
 
 interface SectionTemplate {
   id: string;
   name: string;
   description: string;
   preview: React.ReactNode;
+  blocks: () => LandingPageBlock[];
 }
 
 interface SectionsPanelProps {
-  onSelectTemplate: (templateId: string) => void;
+  onSelectTemplate: (blocks: LandingPageBlock[]) => void;
   onBack: () => void;
 }
 
