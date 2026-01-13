@@ -857,8 +857,36 @@ export function renderBlockToHTML(block: ContentBlock): string {
     }
     case "divider":
       return `<hr style="border: none; border-top: ${block.height}px solid ${block.color}; margin: ${block.margin}px 0;" />`;
-    case "product":
-      return `<div style="text-align: ${block.alignment}; border: 1px solid #ddd; padding: 20px; border-radius: 8px;"><img src="${block.image}" alt="${block.title}" style="width: 100%; max-width: 300px; height: auto;"><h3>${block.title}</h3><p>${block.description}</p><p style="font-weight: bold;">${block.price}</p><a href="${block.buttonLink}" style="background-color: #FF6A00; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px;">${block.buttonText}</a></div>`;
+    case "product": {
+      const productBlock = block as ProductBlock;
+      const productBorder =
+        productBlock.borderWidth > 0
+          ? `border: ${productBlock.borderWidth}px solid ${productBlock.borderColor};`
+          : "border: 1px solid #ddd;";
+      const imageJustify =
+        productBlock.imagePosition === "left"
+          ? "flex-start"
+          : productBlock.imagePosition === "right"
+            ? "flex-end"
+            : "center";
+      const contentJustify =
+        productBlock.alignment === "left"
+          ? "flex-start"
+          : productBlock.alignment === "right"
+            ? "flex-end"
+            : "center";
+      return `<div style="padding: ${productBlock.padding}px; margin: ${productBlock.margin}px; border-radius: ${productBlock.borderRadius}px; ${productBorder} background-color: #ffffff;">
+        <div style="display: flex; justify-content: ${imageJustify}; margin-bottom: 12px;">
+          <img src="${productBlock.image}" alt="${productBlock.title}" style="max-width: 300px; height: auto; border-radius: 4px;" />
+        </div>
+        <h3 style="font-size: 18px; font-weight: bold; margin: 0 0 8px 0; color: #333; text-align: ${productBlock.alignment};">${productBlock.title}</h3>
+        <p style="font-size: 14px; color: #666; margin: 0 0 12px 0; line-height: 1.5; text-align: ${productBlock.alignment};">${productBlock.description}</p>
+        <p style="font-size: 16px; font-weight: bold; color: #FF6A00; margin: 0 0 16px 0; text-align: ${productBlock.alignment};">${productBlock.price}</p>
+        <div style="display: flex; justify-content: ${contentJustify};">
+          <a href="${productBlock.buttonLink}" style="background-color: #FF6A00; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-size: 14px; font-weight: bold;">${productBlock.buttonText}</a>
+        </div>
+      </div>`;
+    }
     case "navigation":
       return `<nav style="background-color: ${block.backgroundColor}; padding: 10px 0; text-align: ${block.alignment};"><a href="#" style="color: ${block.textColor}; margin: 0 15px; text-decoration: none;">Link</a></nav>`;
     case "header":
