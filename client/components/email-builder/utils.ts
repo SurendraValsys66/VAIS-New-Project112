@@ -531,33 +531,34 @@ export function createFooterWithContactTemplate(): ContentBlock[] {
   return [createHtmlBlock(footerContent)];
 }
 
-export function createTwoColumnCardBlock(): HtmlBlock {
+export function createTwoColumnCardBlock() {
   return {
-    type: "html",
+    type: "twoColumnCard",
     id: generateId(),
-    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
-      <tr>
-        <td width="48%" style="vertical-align: top; padding-right: 10px;">
-          <div style="background-color: #333333; color: #ffffff; padding: 24px; border-radius: 8px;">
-            <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">Some title here</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </td>
-        <td width="48%" style="vertical-align: top; padding-left: 10px;">
-          <div style="background-color: #333333; color: #ffffff; padding: 24px; border-radius: 8px;">
-            <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">Some title here</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-          </div>
-        </td>
-      </tr>
-    </table>`,
+    cards: [
+      {
+        id: generateId(),
+        title: "Card Title",
+        description: "Add your card description here",
+        backgroundColor: "#333333",
+        textColor: "#ffffff",
+        borderRadius: 8,
+        padding: 24,
+        margin: 10,
+      },
+      {
+        id: generateId(),
+        title: "Card Title",
+        description: "Add your card description here",
+        backgroundColor: "#333333",
+        textColor: "#ffffff",
+        borderRadius: 8,
+        padding: 24,
+        margin: 10,
+      },
+    ],
     width: 100,
     widthUnit: "%",
-    padding: 0,
-    margin: 0,
-    borderWidth: 0,
-    borderColor: "#000000",
-    borderRadius: 0,
     visibility: "all",
   };
 }
@@ -581,33 +582,41 @@ export function createPromoBlock(): HtmlBlock {
   };
 }
 
-export function createStatsBlock(): HtmlBlock {
+export function createStatsBlock() {
   return {
-    type: "html",
+    type: "stats",
     id: generateId(),
-    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
-      <tr>
-        <td width="33%" style="text-align: center; padding: 20px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">4.8</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Average rating</p>
-        </td>
-        <td width="33%" style="text-align: center; padding: 20px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">120</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Reviews</p>
-        </td>
-        <td width="33%" style="text-align: center; padding: 20px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">200K</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Downloads</p>
-        </td>
-      </tr>
-    </table>`,
+    stats: [
+      {
+        id: generateId(),
+        value: "4.8",
+        label: "Average rating",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+      {
+        id: generateId(),
+        value: "120",
+        label: "Reviews",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+      {
+        id: generateId(),
+        value: "200K",
+        label: "Downloads",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+    ],
     width: 100,
     widthUnit: "%",
-    padding: 0,
-    margin: 0,
-    borderWidth: 0,
-    borderColor: "#000000",
-    borderRadius: 0,
     visibility: "all",
   };
 }
@@ -857,6 +866,39 @@ export function renderBlockToHTML(block: ContentBlock): string {
       const sanitized = sanitizeHTML(htmlBlock.content);
       const compiled = compileHTML(sanitized);
       return `<div style="width: ${htmlBlock.width}${htmlBlock.widthUnit}; padding: ${htmlBlock.padding}px; margin: ${htmlBlock.margin}px;">${compiled}</div>`;
+    }
+    case "twoColumnCard": {
+      const twoColBlock = block as any;
+      const width = `${twoColBlock.width}${twoColBlock.widthUnit}`;
+      const cardsHtml = twoColBlock.cards
+        ?.map(
+          (card: any) =>
+            `<div style="width: 48%; display: inline-block; vertical-align: top; padding-right: 10px; box-sizing: border-box;">
+              <div style="background-color: ${card.backgroundColor}; color: ${card.textColor}; padding: ${card.padding}px; border-radius: ${card.borderRadius}px; margin: ${card.margin}px;">
+                <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">${card.title}</h3>
+                <p style="margin: 0; font-size: 14px; line-height: 1.5;">${card.description}</p>
+              </div>
+            </div>`,
+        )
+        .join("");
+      return `<div style="width: ${width};"><div style="display: flex; gap: 20px;">${cardsHtml}</div></div>`;
+    }
+    case "stats": {
+      const statsBlock = block as any;
+      const width = `${statsBlock.width}${statsBlock.widthUnit}`;
+      const statsHtml = statsBlock.stats
+        ?.map((stat: any, index: number) => {
+          const borderStyle =
+            index !== statsBlock.stats.length - 1
+              ? "border-right: 1px solid #e0e0e0;"
+              : "";
+          return `<div style="width: 33%; display: inline-block; vertical-align: top; text-align: center; padding: ${stat.padding}px; box-sizing: border-box; ${borderStyle}">
+              <h3 style="margin: 0 0 8px 0; font-size: ${stat.fontSize}px; font-weight: bold; color: ${stat.textColor};">${stat.value}</h3>
+              <p style="margin: 0; font-size: ${stat.labelFontSize}px; color: #666;">${stat.label}</p>
+            </div>`;
+        })
+        .join("");
+      return `<div style="width: ${width}; margin: 20px 0;">${statsHtml}</div>`;
     }
     case "divider":
       return `<hr style="border: none; border-top: ${block.height}px solid ${block.color}; margin: ${block.margin}px 0;" />`;

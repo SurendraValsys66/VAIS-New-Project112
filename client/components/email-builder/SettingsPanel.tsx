@@ -27,6 +27,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [groupMarginSides, setGroupMarginSides] = useState(false);
   const [applyBorderToAllSides, setApplyBorderToAllSides] = useState(true);
   const [linkType, setLinkType] = useState("url");
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [selectedStatId, setSelectedStatId] = useState<string | null>(null);
   const paddingValue =
     "padding" in (block || {}) ? ((block as any).padding ?? 0) : 0;
   const marginValue =
@@ -39,6 +41,17 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [marginRight, setMarginRight] = useState(marginValue);
   const [marginBottom, setMarginBottom] = useState(marginValue);
   const [marginLeft, setMarginLeft] = useState(marginValue);
+
+  // Initialize selectedCardId when block changes to twoColumnCard
+  React.useEffect(() => {
+    if (block?.type === "twoColumnCard") {
+      const twoColBlock = block as any;
+      setSelectedCardId(twoColBlock.cards?.[0]?.id || null);
+    } else if (block?.type === "stats") {
+      const statsBlock = block as any;
+      setSelectedStatId(statsBlock.stats?.[0]?.id || null);
+    }
+  }, [block?.id, block?.type]);
 
   if (!block) {
     return (
@@ -5040,14 +5053,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         );
       case "twoColumnCard": {
         const twoColBlock = block as any;
-        const [selectedCardId, setSelectedCardId] = React.useState<
-          string | null
-        >(twoColBlock.cards?.[0]?.id || null);
         const selectedCard = twoColBlock.cards?.find(
           (card: any) => card.id === selectedCardId,
         );
 
-        const handleCardUpdate = (fieldName: string, value: string) => {
+        const handleCardUpdate = (fieldName: string, value: any) => {
           if (!selectedCard) return;
           const updatedCards = twoColBlock.cards.map((card: any) =>
             card.id === selectedCardId ? { ...card, [fieldName]: value } : card,
@@ -5114,137 +5124,307 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
                   />
                 </div>
+
+                <div>
+                  <h4 className="text-xs font-bold text-gray-900 mb-3">
+                    Styling
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-2 block">
+                        Background Color
+                      </Label>
+                      <div className="flex gap-2">
+                        <input
+                          type="color"
+                          value={selectedCard.backgroundColor}
+                          onChange={(e) =>
+                            handleCardUpdate("backgroundColor", e.target.value)
+                          }
+                          className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                        />
+                        <Input
+                          value={selectedCard.backgroundColor}
+                          onChange={(e) =>
+                            handleCardUpdate("backgroundColor", e.target.value)
+                          }
+                          placeholder="#333333"
+                          className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-2 block">
+                        Text Color
+                      </Label>
+                      <div className="flex gap-2">
+                        <input
+                          type="color"
+                          value={selectedCard.textColor}
+                          onChange={(e) =>
+                            handleCardUpdate("textColor", e.target.value)
+                          }
+                          className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                        />
+                        <Input
+                          value={selectedCard.textColor}
+                          onChange={(e) =>
+                            handleCardUpdate("textColor", e.target.value)
+                          }
+                          placeholder="#ffffff"
+                          className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Border Radius
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="0"
+                          max="50"
+                          value={selectedCard.borderRadius}
+                          onChange={(e) =>
+                            handleCardUpdate(
+                              "borderRadius",
+                              parseInt(e.target.value),
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Padding
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="0"
+                          value={selectedCard.padding}
+                          onChange={(e) =>
+                            handleCardUpdate(
+                              "padding",
+                              parseInt(e.target.value),
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Margin
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="0"
+                          value={selectedCard.margin}
+                          onChange={(e) =>
+                            handleCardUpdate("margin", parseInt(e.target.value))
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </>
             )}
+          </div>
+        );
+      }
+      case "stats": {
+        const statsBlock = block as any;
+        const selectedStat = statsBlock.stats?.find(
+          (stat: any) => stat.id === selectedStatId,
+        );
 
+        const handleStatUpdate = (fieldName: string, value: any) => {
+          if (!selectedStat) return;
+          const updatedStats = statsBlock.stats.map((stat: any) =>
+            stat.id === selectedStatId ? { ...stat, [fieldName]: value } : stat,
+          );
+          onBlockUpdate({ ...statsBlock, stats: updatedStats });
+        };
+
+        return (
+          <div className="space-y-5">
             <div>
-              <h4 className="text-xs font-bold text-gray-900 mb-3">Styling</h4>
-              <div className="space-y-3">
-                <div>
-                  <Label className="text-xs text-gray-700 mb-2 block">
-                    Background Color
-                  </Label>
-                  <div className="flex gap-2">
-                    <input
-                      type="color"
-                      value={twoColBlock.backgroundColor}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          backgroundColor: e.target.value,
-                        })
-                      }
-                      className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
-                    />
-                    <Input
-                      value={twoColBlock.backgroundColor}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          backgroundColor: e.target.value,
-                        })
-                      }
-                      placeholder="#333333"
-                      className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="text-xs text-gray-700 mb-2 block">
-                    Text Color
-                  </Label>
-                  <div className="flex gap-2">
-                    <input
-                      type="color"
-                      value={twoColBlock.textColor}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          textColor: e.target.value,
-                        })
-                      }
-                      className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
-                    />
-                    <Input
-                      value={twoColBlock.textColor}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          textColor: e.target.value,
-                        })
-                      }
-                      placeholder="#ffffff"
-                      className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="text-xs text-gray-700 mb-1 block">
-                    Border Radius
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="number"
-                      min="0"
-                      max="50"
-                      value={twoColBlock.borderRadius}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          borderRadius: parseInt(e.target.value),
-                        })
-                      }
-                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
-                    />
-                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="text-xs text-gray-700 mb-1 block">
-                    Padding
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="number"
-                      min="0"
-                      value={twoColBlock.padding}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          padding: parseInt(e.target.value),
-                        })
-                      }
-                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
-                    />
-                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="text-xs text-gray-700 mb-1 block">
-                    Margin
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="number"
-                      min="0"
-                      value={twoColBlock.margin}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...twoColBlock,
-                          margin: parseInt(e.target.value),
-                        })
-                      }
-                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
-                    />
-                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
-                  </div>
-                </div>
+              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                Select Stat to Edit
+              </Label>
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                {statsBlock.stats?.map((stat: any, index: number) => (
+                  <button
+                    key={stat.id}
+                    onClick={() => setSelectedStatId(stat.id)}
+                    className={`px-3 py-2 rounded text-xs font-medium transition-all ${
+                      selectedStatId === stat.id
+                        ? "bg-valasys-orange text-white ring-2 ring-orange-300"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Stat {index + 1}
+                  </button>
+                ))}
               </div>
             </div>
+
+            {selectedStat && (
+              <>
+                <div>
+                  <Label
+                    htmlFor="statValue"
+                    className="text-xs font-semibold text-gray-700 mb-2 block"
+                  >
+                    Value
+                  </Label>
+                  <Input
+                    id="statValue"
+                    value={selectedStat.value}
+                    onChange={(e) => handleStatUpdate("value", e.target.value)}
+                    placeholder="e.g., 4.8"
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="statLabel"
+                    className="text-xs font-semibold text-gray-700 mb-2 block"
+                  >
+                    Label
+                  </Label>
+                  <Input
+                    id="statLabel"
+                    value={selectedStat.label}
+                    onChange={(e) => handleStatUpdate("label", e.target.value)}
+                    placeholder="e.g., Average rating"
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <h4 className="text-xs font-bold text-gray-900 mb-3">
+                    Styling
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Value Font Size
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="12"
+                          max="72"
+                          value={selectedStat.fontSize}
+                          onChange={(e) =>
+                            handleStatUpdate(
+                              "fontSize",
+                              parseInt(e.target.value),
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Label Font Size
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="10"
+                          max="32"
+                          value={selectedStat.labelFontSize}
+                          onChange={(e) =>
+                            handleStatUpdate(
+                              "labelFontSize",
+                              parseInt(e.target.value),
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-2 block">
+                        Text Color
+                      </Label>
+                      <div className="flex gap-2">
+                        <input
+                          type="color"
+                          value={selectedStat.textColor}
+                          onChange={(e) =>
+                            handleStatUpdate("textColor", e.target.value)
+                          }
+                          className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                        />
+                        <Input
+                          value={selectedStat.textColor}
+                          onChange={(e) =>
+                            handleStatUpdate("textColor", e.target.value)
+                          }
+                          placeholder="#000000"
+                          className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Padding
+                      </Label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="number"
+                          min="0"
+                          value={selectedStat.padding}
+                          onChange={(e) =>
+                            handleStatUpdate(
+                              "padding",
+                              parseInt(e.target.value),
+                            )
+                          }
+                          className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                        />
+                        <span className="px-2 py-1 text-sm text-gray-600">
+                          px
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         );
       }

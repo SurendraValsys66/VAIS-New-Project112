@@ -18,6 +18,8 @@ import { FooterWithSocialBlockComponent } from "./blocks/FooterWithSocialBlockCo
 import { SpacerBlockComponent } from "./blocks/SpacerBlockComponent";
 import { CenteredImageCardBlockComponent } from "./blocks/CenteredImageCardBlockComponent";
 import { SplitImageCardBlockComponent } from "./blocks/SplitImageCardBlockComponent";
+import { TwoColumnCardBlockComponent } from "./blocks/TwoColumnCardBlockComponent";
+import { StatsBlockComponent } from "./blocks/StatsBlockComponent";
 
 interface BlockRendererProps {
   block: ContentBlock;
@@ -210,6 +212,26 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
             block={block as any}
             isSelected={isSelected}
             onBlockUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
+          />
+        </div>
+      );
+    case "twoColumnCard":
+      return (
+        <div onClick={handleClick}>
+          <TwoColumnCardBlockComponent
+            block={block as any}
+            isSelected={isSelected}
+            onUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
+          />
+        </div>
+      );
+    case "stats":
+      return (
+        <div onClick={handleClick}>
+          <StatsBlockComponent
+            block={block as any}
+            isSelected={isSelected}
+            onUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
           />
         </div>
       );

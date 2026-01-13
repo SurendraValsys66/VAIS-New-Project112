@@ -13,7 +13,9 @@ export type BlockType =
   | "navigation"
   | "spacer"
   | "centeredImageCard"
-  | "splitImageCard";
+  | "splitImageCard"
+  | "twoColumnCard"
+  | "stats";
 
 export interface TitleBlock {
   type: "title";
@@ -383,6 +385,41 @@ export interface SplitImageCardBlock {
   visibility: "all" | "desktop" | "mobile";
 }
 
+export interface TwoColumnCardBlock {
+  type: "twoColumnCard";
+  id: string;
+  cards: {
+    id: string;
+    title: string;
+    description: string;
+    backgroundColor: string;
+    textColor: string;
+    borderRadius: number;
+    padding: number;
+    margin: number;
+  }[];
+  width: number;
+  widthUnit: "px" | "%";
+  visibility: "all" | "desktop" | "mobile";
+}
+
+export interface StatsBlock {
+  type: "stats";
+  id: string;
+  stats: {
+    id: string;
+    value: string;
+    label: string;
+    fontSize: number;
+    labelFontSize: number;
+    textColor: string;
+    padding: number;
+  }[];
+  width: number;
+  widthUnit: "px" | "%";
+  visibility: "all" | "desktop" | "mobile";
+}
+
 export type ContentBlock =
   | TitleBlock
   | TextBlock
@@ -401,7 +438,9 @@ export type ContentBlock =
   | FooterWithSocialBlock
   | SpacerBlock
   | CenteredImageCardBlock
-  | SplitImageCardBlock;
+  | SplitImageCardBlock
+  | TwoColumnCardBlock
+  | StatsBlock;
 
 export interface EmailTemplate {
   id: string;
