@@ -378,7 +378,7 @@ export default function BuildVAISForm() {
     setBlinkingField(fieldName);
     setTimeout(() => {
       setBlinkingField(null);
-    }, 1200); // Duration of 2 blinks (0.6s per blink)
+    }, 600); // Duration of 1 blink (0.6s)
   };
 
   const filteredTopics = intentTopics.filter(
