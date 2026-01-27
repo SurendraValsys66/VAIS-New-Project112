@@ -83,7 +83,7 @@ export const HeaderBlockComponent: React.FC<HeaderBlockComponentProps> = ({
       </div>
 
       {/* Links */}
-      <div className="flex-shrink-0 flex gap-2">
+      <div className="flex-shrink-0 flex gap-2 items-center">
         {block.links.length > 0 ? (
           block.links.map((link, index) => (
             <React.Fragment key={link.id}>
@@ -104,8 +104,8 @@ export const HeaderBlockComponent: React.FC<HeaderBlockComponentProps> = ({
             </React.Fragment>
           ))
         ) : (
-          <span style={{ fontSize: `${block.linksFontSize}px`, color: block.linksFontColor }}>
-            No links
+          <span style={{ fontSize: `${block.linksFontSize}px`, color: block.linksFontColor }} className="text-xs">
+            No links (add in Settings)
           </span>
         )}
       </div>
