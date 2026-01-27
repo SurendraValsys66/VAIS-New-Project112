@@ -66,6 +66,13 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+
+    setDownloaded(true);
+    setOpenDownloadTooltip(true);
+    setTimeout(() => {
+      setDownloaded(false);
+      setOpenDownloadTooltip(false);
+    }, 2000);
   };
 
   return (
