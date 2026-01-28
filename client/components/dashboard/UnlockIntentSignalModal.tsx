@@ -64,7 +64,7 @@ export default function UnlockIntentSignalModal({
     if (selectedOptions.size > 0) {
       onUnlock(Array.from(selectedOptions));
       onOpenChange(false);
-      setSelectedOptions(new Set());
+      setSelectedOptions(new Set(["current"]));
     }
   };
 
