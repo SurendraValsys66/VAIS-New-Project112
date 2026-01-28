@@ -189,7 +189,7 @@ export default function UnlockIntentSignalModal({
               <Button
                 onClick={() => {
                   onOpenChange(false);
-                  setSelectedOptions(new Set());
+                  setSelectedOptions(new Set(["current"]));
                 }}
                 variant="outline"
                 className="flex-1 h-11"
