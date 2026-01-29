@@ -83,9 +83,9 @@ export default function UnlockIntentSignalModal({
                 of Intent Signal
               </h2>
               <p className="text-gray-600 text-base leading-relaxed">
-                Unlock advanced AI automation. Boost your productivity, streamline
-                your tasks, and stay ahead of the competition. Experience the
-                future of efficiency today.
+                Unlock advanced AI automation. Boost your productivity,
+                streamline your tasks, and stay ahead of the competition.
+                Experience the future of efficiency today.
               </p>
             </div>
 
