@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Zap, Info } from "lucide-react";
+import { Zap, CheckCircle2, BarChart3, TrendingUp, Lightbulb, Lock as LockIcon } from "lucide-react";
 
 interface UnlockIntentSignalModalProps {
   open: boolean;
