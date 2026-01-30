@@ -215,52 +215,70 @@ export default function IntentSignalPopover({
             <div className="space-y-6">
               {/* Intent Signal Breakdown Chart */}
               <div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                  <div className="w-1 h-5 bg-valasys-orange rounded-full"></div>
-                  <span>Intent Signal Breakdown</span>
-                </h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-base font-bold text-gray-900 flex items-center space-x-2">
+                    <div className="w-1 h-6 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
+                    <span>Intent Signal Trend</span>
+                  </h3>
+                  <div className="flex items-center space-x-2 text-xs">
+                    <span className="text-gray-500">7-week view</span>
+                    <Activity className="w-3.5 h-3.5 text-emerald-500" />
+                  </div>
+                </div>
                 <div
-                  className="border border-gray-200 rounded-lg bg-gradient-to-br from-gray-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-md transition-all duration-300 overflow-hidden"
+                  className="border border-gray-200 rounded-xl bg-gradient-to-br from-slate-50 to-white cursor-pointer hover:border-valasys-orange hover:shadow-lg transition-all duration-300 overflow-hidden group"
                   onClick={handleChartClick}
-                  style={{ height: "280px" }}
+                  style={{ height: "320px" }}
                 >
                   <ChartContainer
                     config={chartConfig}
                     className="w-full h-full"
                   >
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
+                      <AreaChart
                         data={chartData}
                         margin={{
-                          top: 10,
+                          top: 15,
                           right: 30,
-                          left: 0,
-                          bottom: 10,
+                          left: -5,
+                          bottom: 15,
                         }}
                       >
+                        <defs>
+                          <linearGradient id="colorComposite" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#EF4444" stopOpacity={0}/>
+                          </linearGradient>
+                          <linearGradient id="colorDelta" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#6366F1" stopOpacity={0}/>
+                          </linearGradient>
+                        </defs>
                         <CartesianGrid
                           strokeDasharray="3 3"
-                          className="opacity-20"
+                          className="opacity-10"
                           vertical={false}
                         />
                         <XAxis
                           dataKey="week"
-                          fontSize={11}
+                          fontSize={12}
                           tickLine={false}
                           axisLine={false}
-                          tick={{ fill: "#999" }}
+                          tick={{ fill: "#999", fontSize: 12 }}
                         />
                         <YAxis
-                          fontSize={11}
+                          fontSize={12}
                           tickLine={false}
                           axisLine={false}
-                          tick={{ fill: "#999" }}
+                          tick={{ fill: "#999", fontSize: 12 }}
                         />
                         <ChartTooltip content={<ChartTooltipContent />} />
-                        <Line
+                        <Area
                           type="monotone"
                           dataKey="compositeScore"
                           stroke={chartConfig.compositeScore.color}
+                          fillOpacity={1}
+                          fill="url(#colorComposite)"
                           strokeWidth={2.5}
                           dot={{
                             fill: chartConfig.compositeScore.color,
@@ -272,10 +290,12 @@ export default function IntentSignalPopover({
                           }}
                           isAnimationActive={true}
                         />
-                        <Line
+                        <Area
                           type="monotone"
                           dataKey="deltaScore"
                           stroke={chartConfig.deltaScore.color}
+                          fillOpacity={1}
+                          fill="url(#colorDelta)"
                           strokeWidth={2.5}
                           dot={{
                             fill: chartConfig.deltaScore.color,
@@ -287,13 +307,26 @@ export default function IntentSignalPopover({
                           }}
                           isAnimationActive={true}
                         />
-                      </LineChart>
+                      </AreaChart>
                     </ResponsiveContainer>
                   </ChartContainer>
                 </div>
-                <p className="text-xs text-gray-500 mt-2 text-center hover:text-valasys-orange transition-colors cursor-pointer">
-                  Click to view full breakdown →
-                </p>
+                <div className="flex items-center justify-between mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                  <div className="flex items-center space-x-4 flex-1">
+                    <div>
+                      <p className="text-xs text-gray-600 font-medium">Composite Score</p>
+                      <p className="text-sm font-bold text-gray-900">↑ 42% week-over-week</p>
+                    </div>
+                    <div className="w-px h-8 bg-gray-300"></div>
+                    <div>
+                      <p className="text-xs text-gray-600 font-medium">Delta Score</p>
+                      <p className="text-sm font-bold text-gray-900">↑ 18% week-over-week</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-valasys-orange font-semibold cursor-pointer hover:underline ml-4">
+                    View Details →
+                  </p>
+                </div>
               </div>
 
               {/* Topics Section */}
