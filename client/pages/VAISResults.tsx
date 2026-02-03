@@ -1266,6 +1266,8 @@ export default function VAISResults() {
                                   onLockClick={() =>
                                     handleBadgeLockClick(item.id)
                                   }
+                                  itemId={item.id}
+                                  onAddToList={handleSelectItem}
                                 />
                               </TableCell>
                             )}
