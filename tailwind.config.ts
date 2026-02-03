@@ -99,12 +99,15 @@ export default {
             height: "0",
           },
         },
-        "smooth-pulse": {
-          "0%, 100%": {
-            opacity: "1",
+        "badge-popup": {
+          "0%": {
+            transform: "scale(1)",
           },
           "50%": {
-            opacity: "0.6",
+            transform: "scale(1.12)",
+          },
+          "100%": {
+            transform: "scale(1)",
           },
         },
       },
