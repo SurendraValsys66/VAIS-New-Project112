@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Building2,
   MapPin,
@@ -10,6 +11,8 @@ import {
   Zap,
   Activity,
   Sparkles,
+  Plus,
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import IntentSignalModal from "./IntentSignalModal";
