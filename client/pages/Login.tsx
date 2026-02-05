@@ -258,7 +258,7 @@ export default function Login() {
               <Button
                 type="submit"
                 disabled={isVerifying || otpValue.length !== 6}
-                className="w-full bg-valasys-orange hover:bg-valasys-orange-light text-white font-medium py-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-102"
+                className="w-full bg-valasys-orange hover:bg-valasys-orange-light text-white font-medium py-2.5 lg:py-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-102 text-sm"
               >
                 {isVerifying ? (
                   <div className="flex items-center space-x-2">
@@ -278,7 +278,7 @@ export default function Login() {
               <button
                 onClick={handleResendOTP}
                 disabled={!canResendOTP}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs lg:text-sm font-medium transition-colors ${
                   canResendOTP
                     ? "text-valasys-orange hover:text-valasys-orange-light"
                     : "text-valasys-gray-400 cursor-not-allowed"
@@ -297,7 +297,7 @@ export default function Login() {
 
             <button
               onClick={() => setShow2FA(false)}
-              className="w-full text-sm text-valasys-gray-600 hover:text-valasys-gray-800 transition-colors"
+              className="w-full text-xs lg:text-sm text-valasys-gray-600 hover:text-valasys-gray-800 transition-colors"
             >
               ← Back to login
             </button>
