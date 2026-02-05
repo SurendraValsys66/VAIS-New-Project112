@@ -375,31 +375,31 @@ export default function Login() {
       </div>
 
       {/* Left Side - Login Form */}
-      <div className="flex items-center justify-center p-8 relative z-10">
+      <div className="flex items-center justify-center p-4 lg:p-6 relative z-10">
         <div
-          className={`w-full max-w-md space-y-6 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+          className={`w-full max-w-sm lg:max-w-md space-y-4 lg:space-y-5 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
         >
           <div className="flex justify-center">
             <img
               src="https://cdn.builder.io/api/v1/image/assets%2F426248ed656b441dac67bed7c1e875db%2F18bb5a938b5c412bb089e8da7936d067?format=webp&width=800"
               alt="Valasys AI Score logo"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-8 lg:h-10 w-auto object-contain"
             />
           </div>
           {/* Login Card */}
           <Card className="border-valasys-gray-200 shadow-xl hover:shadow-2xl transition-all duration-400 backdrop-blur-sm bg-white/95">
-            <CardHeader className="space-y-1 pb-4 text-center">
-              <CardTitle className="text-lg font-semibold text-valasys-gray-900">
+            <CardHeader className="space-y-0.5 pb-3 text-center">
+              <CardTitle className="text-base font-semibold text-valasys-gray-900">
                 Sign in
               </CardTitle>
-              <p className="text-sm text-valasys-gray-600">
+              <p className="text-xs lg:text-sm text-valasys-gray-600">
                 to your Valasys AI Score account
               </p>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <CardContent className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 {/* Email Field */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <Label
                     htmlFor="email"
                     className="text-valasys-gray-700 flex items-center space-x-1"
@@ -426,7 +426,7 @@ export default function Login() {
                 </div>
 
                 {/* Password Field */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <Label
                     htmlFor="password"
                     className="text-valasys-gray-700 flex items-center space-x-1"
@@ -484,12 +484,12 @@ export default function Login() {
                 </div>
 
                 {/* Google reCAPTCHA Placeholder */}
-                <div className="bg-valasys-gray-50 border border-valasys-gray-200 rounded-lg p-4 text-center">
-                  <div className="flex items-center justify-center space-x-2 text-valasys-gray-600">
-                    <Shield className="h-4 w-4" />
-                    <span className="text-sm">reCAPTCHA verification</span>
+                <div className="bg-valasys-gray-50 border border-valasys-gray-200 rounded-lg p-3 text-center">
+                  <div className="flex items-center justify-center space-x-1.5 text-valasys-gray-600">
+                    <Shield className="h-3.5 w-3.5" />
+                    <span className="text-xs lg:text-sm">reCAPTCHA verification</span>
                   </div>
-                  <p className="text-xs text-valasys-gray-500 mt-1">
+                  <p className="text-xs text-valasys-gray-500 mt-0.5">
                     Protected by Google reCAPTCHA
                   </p>
                 </div>
@@ -498,7 +498,7 @@ export default function Login() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-valasys-orange hover:bg-valasys-orange-light text-white font-medium py-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-102"
+                  className="w-full bg-valasys-orange hover:bg-valasys-orange-light text-white font-medium py-2.5 lg:py-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-102 text-sm"
                 >
                   {isLoading ? (
                     <div className="flex items-center space-x-2">
@@ -516,11 +516,8 @@ export default function Login() {
               </form>
 
               {/* Account signup text - moved inside card */}
-              <div className="text-center pt-4">
-                <p
-                  className="text-valasys-gray-600"
-                  style={{ fontSize: "16px" }}
-                >
+              <div className="text-center pt-2">
+                <p className="text-valasys-gray-600 text-xs lg:text-sm">
                   Don't have an account?{" "}
                   <Link
                     to="/free-trial"
@@ -544,15 +541,15 @@ export default function Login() {
           <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-valasys-blue/10 blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col w-full h-full px-16 py-12">
+        <div className="relative z-10 flex flex-col w-full h-full px-8 lg:px-12 py-8 lg:py-10">
           {/* Header Section */}
           <div
-            className={`mb-8 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"}`}
+            className={`mb-4 lg:mb-6 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"}`}
           >
-            <p className="text-sm font-semibold text-valasys-orange tracking-widest uppercase mb-2">
+            <p className="text-xs font-semibold text-valasys-orange tracking-widest uppercase mb-1.5">
               Welcome Back
             </p>
-            <h2 className="text-3xl font-bold text-valasys-gray-900 leading-tight">
+            <h2 className="text-xl lg:text-2xl font-bold text-valasys-gray-900 leading-snug">
               Your AI Scoring <br />
               <span className="text-valasys-orange">
                 Revolution Starts Here
@@ -561,7 +558,7 @@ export default function Login() {
           </div>
 
           {/* Main Content Container */}
-          <div className="flex-1 flex flex-col justify-center space-y-8">
+          <div className="flex-1 flex flex-col justify-center space-y-4 lg:space-y-6">
             {/* Premium Video Showcase */}
             <div
               className={`transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
@@ -574,7 +571,7 @@ export default function Login() {
                   muted
                   loop
                   playsInline
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-40 lg:h-52 object-cover group-hover:scale-105 transition-transform duration-500"
                   poster="/placeholder.svg"
                 >
                   <source
@@ -588,30 +585,30 @@ export default function Login() {
 
                 {/* Play Icon Badge */}
                 <div className="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <div className="p-4 rounded-full bg-valasys-orange/90 backdrop-blur-sm group-hover:bg-valasys-orange transition-colors duration-300">
-                    <Play className="h-6 w-6 text-white" fill="currentColor" />
+                  <div className="p-2.5 lg:p-3 rounded-full bg-valasys-orange/90 backdrop-blur-sm group-hover:bg-valasys-orange transition-colors duration-300">
+                    <Play className="h-5 lg:h-6 w-5 lg:w-6 text-white" fill="currentColor" />
                   </div>
                 </div>
 
                 {/* Stats Badges Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 flex gap-3">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 text-xs">
-                    <p className="font-semibold text-valasys-gray-900">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex gap-2">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
+                    <p className="font-semibold text-valasys-gray-900 text-xs">
                       AI-Powered
                     </p>
                   </div>
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 text-xs">
-                    <p className="font-semibold text-valasys-gray-900">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
+                    <p className="font-semibold text-valasys-gray-900 text-xs">
                       Real-time
                     </p>
                   </div>
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 text-xs">
-                    <p className="font-semibold text-valasys-gray-900">Smart</p>
+                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
+                    <p className="font-semibold text-valasys-gray-900 text-xs">Smart</p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm text-valasys-gray-600 mt-4 text-center">
+              <p className="text-xs lg:text-sm text-valasys-gray-600 mt-2 lg:mt-3 text-center">
                 See how VAIS transforms your sales intelligence
               </p>
             </div>
@@ -620,13 +617,13 @@ export default function Login() {
 
           {/* Bottom Section - Partnerships & Trust */}
           <div
-            className={`mt-6 pt-4 border-t border-white/20 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+            className={`mt-3 lg:mt-4 pt-3 border-t border-white/20 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             style={{ transitionDelay: "300ms" }}
           >
             {/* Compact Partners Section */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Sparkles className="h-3.5 w-3.5 text-valasys-orange" />
+            <div className="space-y-1.5">
+              <div className="flex items-center space-x-1.5">
+                <Sparkles className="h-3 w-3 text-valasys-orange" />
                 <p className="text-xs font-semibold text-valasys-gray-900 uppercase tracking-widest">
                   Trusted Partners
                 </p>
@@ -635,14 +632,14 @@ export default function Login() {
             </div>
 
             {/* Trust Badges - Inline */}
-            <div className="flex items-center gap-5 pt-3 text-xs">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle className="h-3.5 w-3.5 text-valasys-green flex-shrink-0" />
-                <span className="text-valasys-gray-700 font-medium">SOC 2</span>
+            <div className="flex items-center gap-4 pt-2 text-xs">
+              <div className="flex items-center gap-1">
+                <CheckCircle className="h-3 w-3 text-valasys-green flex-shrink-0" />
+                <span className="text-valasys-gray-700 font-medium text-xs">SOC 2</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-valasys-blue flex-shrink-0" />
-                <span className="text-valasys-gray-700 font-medium">GDPR</span>
+              <div className="flex items-center gap-1">
+                <Shield className="h-3 w-3 text-valasys-blue flex-shrink-0" />
+                <span className="text-valasys-gray-700 font-medium text-xs">GDPR</span>
               </div>
             </div>
           </div>
