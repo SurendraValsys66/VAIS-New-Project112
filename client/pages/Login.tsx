@@ -33,7 +33,6 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@/lib/utils";
-import IntegrationsFooter from "@/components/auth/IntegrationsFooter";
 import AssociationPartners from "@/components/auth/AssociationPartners";
 
 export default function Login() {
@@ -49,65 +48,7 @@ export default function Login() {
   const [isVerifying, setIsVerifying] = useState(false);
   const [canResendOTP, setCanResendOTP] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(30);
-  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
   const navigate = useNavigate();
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "James Martin",
-      title: "VP Sales, TechCorp",
-      quote: "VAIS completely transformed how we prioritize leads",
-      review: "ROI increased by 40% in just 3 months.",
-      initials: "JM",
-      color: "from-valasys-orange to-valasys-orange-light",
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: "Sarah Rodriguez",
-      title: "Director, Sales Growth",
-      quote: "The AI insights are incredible",
-      review: "We're closing deals 2x faster with better quality leads.",
-      initials: "SR",
-      color: "from-valasys-blue to-valasys-blue-light",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Michael Kim",
-      title: "CEO, Growth Ventures",
-      quote: "Best investment we've made",
-      review: "Immediate impact on pipeline quality and team efficiency.",
-      initials: "MK",
-      color: "from-valasys-green to-valasys-green-light",
-      rating: 5,
-    },
-    {
-      id: 4,
-      name: "Brian M.",
-      title: "Sales Development Rep",
-      quote: "Finding Hot Leads Has Never Been This Easy",
-      review:
-        "I like how Valasys AI tells me which companies are actually ready to hear from us. As an Sales Development Rep, I need to know who to call first. The score makes that super clear. I also like the contact lists—it helps me find the right people in each company so I don't waste time hunting them down.",
-      initials: "BM",
-      color: "from-valasys-orange to-valasys-orange-light",
-      rating: 5,
-    },
-  ];
-
-  const nextTestimonial = () => {
-    setCurrentTestimonialIndex(
-      (prev) => (prev + 1) % (testimonials.length - 1),
-    );
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonialIndex(
-      (prev) =>
-        (prev - 1 + (testimonials.length - 1)) % (testimonials.length - 1),
-    );
-  };
 
   useEffect(() => {
     setMounted(true);
@@ -592,10 +533,6 @@ export default function Login() {
             </CardContent>
           </Card>
 
-          {/* Powered by 50+ Integrations (below form) */}
-          <div className="pt-4">
-            <IntegrationsFooter />
-          </div>
         </div>
       </div>
 
@@ -679,145 +616,6 @@ export default function Login() {
               </p>
             </div>
 
-            {/* Customer Testimonials Section */}
-            <div
-              className={`space-y-6 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-              style={{ transitionDelay: "150ms" }}
-            >
-              {/* Section Title */}
-              <div>
-                <h3 className="text-lg font-bold text-valasys-gray-900">
-                  What Our Customers Say
-                </h3>
-                <p className="text-xs text-valasys-gray-600 mt-1">
-                  Trusted by leading sales teams
-                </p>
-              </div>
-
-              {/* Customer Testimonials Carousel */}
-              {/* Carousel Container */}
-              <div className="relative">
-                {/* Testimonial Cards Grid (2 visible) */}
-                <div className="grid grid-cols-2 gap-6">
-                  {[
-                    currentTestimonialIndex,
-                    (currentTestimonialIndex + 1) % testimonials.length,
-                  ].map((index) => {
-                    const testimonial = testimonials[index];
-                    return (
-                      <div
-                        key={testimonial.id}
-                        className="bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm rounded-2xl p-7 border border-white/50 hover:border-valasys-orange/40 hover:from-white/90 hover:to-white/75 transition-all duration-300 shadow-lg hover:shadow-xl group"
-                      >
-                        {/* Header: Avatar and Name */}
-                        <div className="flex items-start justify-between gap-4 mb-5">
-                          <div className="flex items-start gap-3 flex-1">
-                            <div
-                              className={`w-14 h-14 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-md`}
-                            >
-                              {testimonial.initials}
-                            </div>
-                            <div className="flex-1 pt-1">
-                              <h4 className="font-bold text-sm text-valasys-gray-900 leading-tight">
-                                {testimonial.name}
-                              </h4>
-                              <p className="text-xs text-valasys-gray-600 mt-0.5">
-                                {testimonial.title}
-                              </p>
-                            </div>
-                          </div>
-                          {/* G2 Badge Icon */}
-                          <div className="w-10 h-10 rounded-full bg-valasys-orange/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-valasys-orange text-xs font-bold">
-                              G2
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Rating Stars */}
-                        <div className="flex gap-0.5 mb-4">
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <span
-                              key={i}
-                              className="text-valasys-orange text-lg leading-none"
-                            >
-                              ★
-                            </span>
-                          ))}
-                          <span className="text-xs text-valasys-gray-600 ml-2 font-medium">
-                            5.0 out of 5
-                          </span>
-                        </div>
-
-                        {/* Review Title/Quote */}
-                        <h5 className="font-bold text-sm text-valasys-gray-900 mb-3 leading-snug">
-                          "{testimonial.quote}"
-                        </h5>
-
-                        {/* Review Text */}
-                        <p className="text-xs text-valasys-gray-700 leading-relaxed mb-0">
-                          {testimonial.review}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Navigation Arrows */}
-                <button
-                  onClick={prevTestimonial}
-                  className="absolute -left-5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 backdrop-blur-sm border border-white/30 hover:bg-white/90 hover:border-valasys-orange/30 transition-all duration-300 group"
-                >
-                  <svg
-                    className="w-4 h-4 text-valasys-gray-600 group-hover:text-valasys-orange transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-
-                <button
-                  onClick={nextTestimonial}
-                  className="absolute -right-5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 backdrop-blur-sm border border-white/30 hover:bg-white/90 hover:border-valasys-orange/30 transition-all duration-300 group"
-                >
-                  <svg
-                    className="w-4 h-4 text-valasys-gray-600 group-hover:text-valasys-orange transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-
-                {/* Dots Indicator */}
-                <div className="flex justify-center gap-2 mt-6">
-                  {[...Array(testimonials.length - 1)].map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentTestimonialIndex(i)}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        i === currentTestimonialIndex
-                          ? "w-8 bg-valasys-orange"
-                          : "w-2 bg-white/40 hover:bg-white/60"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Bottom Section - Partnerships & Trust */}
