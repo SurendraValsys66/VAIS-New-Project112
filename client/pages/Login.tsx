@@ -574,7 +574,7 @@ export default function Login() {
                   muted
                   loop
                   playsInline
-                  className="w-full h-40 lg:h-52 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-36 lg:h-44 object-cover group-hover:scale-105 transition-transform duration-500"
                   poster="/placeholder.svg"
                 >
                   <source
