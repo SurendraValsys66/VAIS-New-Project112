@@ -590,22 +590,6 @@ export default function Login() {
                   </div>
                 </div>
 
-                {/* Stats Badges Overlay */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex gap-2">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
-                    <p className="font-semibold text-valasys-gray-900 text-xs">
-                      AI-Powered
-                    </p>
-                  </div>
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
-                    <p className="font-semibold text-valasys-gray-900 text-xs">
-                      Real-time
-                    </p>
-                  </div>
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs">
-                    <p className="font-semibold text-valasys-gray-900 text-xs">Smart</p>
-                  </div>
-                </div>
               </div>
 
               <p className="text-xs lg:text-sm text-valasys-gray-600 mt-2 lg:mt-3 text-center">
