@@ -649,59 +649,52 @@ function DeliverablesDialog({
           </Tabs>
 
 
-          {/* Campaign Summary Section */}
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100/50 rounded-lg p-5 border border-blue-200">
-            <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2 text-lg">
-              <Target className="w-5 h-5 text-blue-600" />
+          {/* Campaign Criteria Summary */}
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <h3 className="font-semibold text-gray-900 mb-5 flex items-center gap-2">
+              <Target className="w-4 h-4 text-gray-600" />
               Campaign Criteria Summary
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Campaign Name</p>
-                <p className="text-sm font-medium text-gray-900">
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Campaign Name</p>
+                <p className="text-sm font-semibold text-gray-900">
                   {campaignName || "Not specified"}
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Employee Size</p>
-                <p className="text-sm font-medium text-gray-900">
-                  {employeeSize || "Not specified"}
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Revenue Range</p>
-                <p className="text-sm font-medium text-gray-900">
-                  {revenue || "Not specified"}
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Job Titles Selected</p>
-                <p className="text-sm font-medium text-gray-900">
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Job Titles Selected</p>
+                <p className="text-sm font-semibold text-gray-900">
                   {jobTitles.length} title{jobTitles.length !== 1 ? "s" : ""}
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Job Functions</p>
-                <p className="text-sm font-medium text-gray-900">
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Employee Size</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {employeeSize || "Not specified"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Job Functions Selected</p>
+                <p className="text-sm font-semibold text-gray-900">
                   {jobFunctions.length} function{jobFunctions.length !== 1 ? "s" : ""}
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Industries</p>
-                <p className="text-sm font-medium text-gray-900">
-                  {industries.length} industr{industries.length !== 1 ? "ies" : "y"}
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Revenue Range</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {revenue || "Not specified"}
                 </p>
               </div>
 
-              <div className="bg-white rounded-lg p-3 border border-blue-100 md:col-span-2">
-                <p className="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wide">Geographies Selected</p>
-                <p className="text-sm font-medium text-gray-900">
-                  {geolocations.length > 0 ? geolocations.join(", ") : "Not specified"}
+              <div>
+                <p className="text-xs text-gray-600 font-medium mb-1">Industries Selected</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {industries.length} industr{industries.length !== 1 ? "ies" : "y"}
                 </p>
               </div>
             </div>
