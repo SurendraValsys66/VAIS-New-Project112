@@ -389,7 +389,8 @@ function DeliverablesDialog({
   isFormValid = true,
 }: DeliverablesDialogProps) {
   const [open, setOpen] = useState(false);
-  const [campaignStatus, setCampaignStatus] = useState<CampaignStatus>("pending");
+  const [campaignStatus, setCampaignStatus] =
+    useState<CampaignStatus>("pending");
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   // Region mappings
@@ -499,13 +500,10 @@ function DeliverablesDialog({
   const selectedGeolocations = geolocations.slice(0, 5);
 
   // Use only selected job levels (no limit)
-  const selectedJobLevels = jobLevels.length > 0 ? jobLevels : [
-    "C-Level",
-    "Vice President",
-    "Director",
-    "Manager",
-    "Staff",
-  ];
+  const selectedJobLevels =
+    jobLevels.length > 0
+      ? jobLevels
+      : ["C-Level", "Vice President", "Director", "Manager", "Staff"];
 
   // Generate Database Reach data by Job Level
   const generateJobLevelData = () => {
@@ -533,16 +531,18 @@ function DeliverablesDialog({
   }, 0);
 
   // Use only selected employee sizes (no limit)
-  const selectedEmployeeSizeList = employeeSize ? [employeeSize] : [
-    "1-10",
-    "11-50",
-    "51-200",
-    "201-500",
-    "501-1000",
-    "1001-5000",
-    "5001-10,000",
-    "10,000+",
-  ];
+  const selectedEmployeeSizeList = employeeSize
+    ? [employeeSize]
+    : [
+        "1-10",
+        "11-50",
+        "51-200",
+        "201-500",
+        "501-1000",
+        "1001-5000",
+        "5001-10,000",
+        "10,000+",
+      ];
 
   // Generate Database Reach data by Employee Size
   const generateEmployeeSizeData = () => {
@@ -726,7 +726,8 @@ function DeliverablesDialog({
                     <tbody>
                       {selectedEmployeeSizeList.map((size, index) => {
                         const sizeTotal = selectedGeolocations.reduce(
-                          (sum, geo) => sum + (employeeSizeData[size]?.[geo] || 0),
+                          (sum, geo) =>
+                            sum + (employeeSizeData[size]?.[geo] || 0),
                           0,
                         );
                         return (
@@ -817,7 +818,9 @@ function DeliverablesDialog({
                 <div className="bg-green-50 border border-green-200 rounded p-4 flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-green-900">Campaign Accepted</p>
+                    <p className="font-medium text-green-900">
+                      Campaign Accepted
+                    </p>
                     <p className="text-sm text-green-700 mt-1">
                       Our team will contact you shortly with next steps.
                     </p>
@@ -829,9 +832,12 @@ function DeliverablesDialog({
                 <div className="bg-red-50 border border-red-200 rounded p-4 flex items-center gap-3">
                   <X className="w-5 h-5 text-red-600 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-red-900">Campaign Declined</p>
+                    <p className="font-medium text-red-900">
+                      Campaign Declined
+                    </p>
                     <p className="text-sm text-red-700 mt-1">
-                      This campaign has been marked as declined. You can start a new campaign request.
+                      This campaign has been marked as declined. You can start a
+                      new campaign request.
                     </p>
                   </div>
                 </div>
@@ -849,7 +855,8 @@ function DeliverablesDialog({
               <li className="flex gap-2 text-gray-700">
                 <ChevronRight className="w-3 h-3 text-blue-600 flex-shrink-0 mt-0.5" />
                 <span className="text-xs">
-                  These are estimated counts based on current database. Final numbers may vary slightly
+                  These are estimated counts based on current database. Final
+                  numbers may vary slightly
                 </span>
               </li>
               <li className="flex gap-2 text-gray-700">
@@ -861,7 +868,8 @@ function DeliverablesDialog({
               <li className="flex gap-2 text-gray-700">
                 <ChevronRight className="w-3 h-3 text-blue-600 flex-shrink-0 mt-0.5" />
                 <span className="text-xs">
-                  All deliverables include verified contact information and professional background
+                  All deliverables include verified contact information and
+                  professional background
                 </span>
               </li>
             </ul>
