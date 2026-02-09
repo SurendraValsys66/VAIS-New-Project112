@@ -637,7 +637,7 @@ function DeliverablesDialog({
                       </tr>
                     </thead>
                     <tbody>
-                      {jobLevelList.map((level, index) => {
+                      {selectedJobLevels.map((level, index) => {
                         const levelTotal = selectedGeolocations.reduce(
                           (sum, geo) => sum + (jobLevelData[level]?.[geo] || 0),
                           0,
@@ -673,7 +673,7 @@ function DeliverablesDialog({
                             key={geo}
                             className="px-6 py-3 text-sm text-center text-gray-900"
                           >
-                            {jobLevelList.reduce(
+                            {selectedJobLevels.reduce(
                               (sum, level) =>
                                 sum + (jobLevelData[level]?.[geo] || 0),
                               0,
