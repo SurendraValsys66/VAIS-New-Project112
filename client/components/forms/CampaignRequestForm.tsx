@@ -510,7 +510,7 @@ function DeliverablesDialog({
 
         <div className="space-y-6 py-4">
           {/* Key Metrics Section */}
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-3 gap-4">
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200">
               <div className="flex items-center gap-2 mb-2">
                 <Users className="w-4 h-4 text-orange-600" />
