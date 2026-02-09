@@ -1253,6 +1253,7 @@ export default function CampaignRequestForm() {
                   campaignName={form.watch("campaignName")}
                   employeeSize={form.watch("employeeSize")}
                   revenue={form.watch("revenue")}
+                  isFormValid={isFormValid()}
                 />
               </div>
 
