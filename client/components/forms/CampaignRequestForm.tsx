@@ -379,6 +379,7 @@ type CampaignStatus = "pending" | "accepted" | "declined";
 function DeliverablesDialog({
   jobTitles,
   jobFunctions,
+  jobLevels,
   geolocations,
   industries,
   campaignName,
