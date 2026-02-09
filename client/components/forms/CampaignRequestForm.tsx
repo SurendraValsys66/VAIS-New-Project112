@@ -340,6 +340,179 @@ function FileUpload({ onFileChange, file }: FileUploadProps) {
   );
 }
 
+// Deliverables component for showing region-wise breakdown
+interface DeliverablesPopoverProps {
+  jobTitles: string[];
+  jobFunctions: string[];
+  geolocations: string[];
+  industries: string[];
+}
+
+function DeliverablesPopover({
+  jobTitles,
+  jobFunctions,
+  geolocations,
+  industries,
+}: DeliverablesPopoverProps) {
+  // Region mappings
+  const regionMap: { [key: string]: string } = {
+    "United States": "NAMER",
+    Canada: "NAMER",
+    Mexico: "LATAM",
+    Brazil: "LATAM",
+    "United Kingdom": "EMEA",
+    Germany: "EMEA",
+    France: "EMEA",
+    Australia: "APAC",
+    India: "APAC",
+    Singapore: "APAC",
+    Japan: "APAC",
+  };
+
+  // Calculate deliverables by region
+  const regionDeliverables: { [key: string]: number } = {
+    NAMER: 0,
+    EMEA: 0,
+    APAC: 0,
+    LATAM: 0,
+    MENA: 0,
+  };
+
+  // Calculate based on selections (dummy logic)
+  geolocations.forEach((geo) => {
+    const region = regionMap[geo] || "MENA";
+    const baseCount = jobTitles.length * jobFunctions.length * industries.length;
+    regionDeliverables[region] += Math.max(100 + Math.floor(Math.random() * 400), 150);
+  });
+
+  // If no selections, show default counts
+  if (geolocations.length === 0) {
+    regionDeliverables.NAMER = 1250;
+    regionDeliverables.EMEA = 980;
+    regionDeliverables.APAC = 750;
+    regionDeliverables.LATAM = 450;
+    regionDeliverables.MENA = 320;
+  }
+
+  const totalDeliverables = Object.values(regionDeliverables).reduce(
+    (a, b) => a + b,
+    0
+  );
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          type="button"
+          className="text-xs bg-orange-500 text-white border-orange-500 hover:bg-orange-600 flex items-center gap-2"
+        >
+          <Info className="w-4 h-4" />
+          Check Deliverables
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80 p-4">
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold text-sm text-gray-900 mb-3">
+              Estimated Deliverables by Region
+            </h4>
+            <p className="text-xs text-gray-600 mb-4">
+              Based on your selected campaign criteria
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            {/* NAMER */}
+            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span className="text-sm font-medium text-gray-900">NAMER</span>
+                <span className="text-xs text-gray-600">
+                  (North America, Europe, Middle East)
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-blue-600">
+                {regionDeliverables.NAMER.toLocaleString()}
+              </span>
+            </div>
+
+            {/* EMEA */}
+            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span className="text-sm font-medium text-gray-900">EMEA</span>
+                <span className="text-xs text-gray-600">
+                  (Europe, Middle East, Africa)
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-green-600">
+                {regionDeliverables.EMEA.toLocaleString()}
+              </span>
+            </div>
+
+            {/* APAC */}
+            <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-purple-200">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                <span className="text-sm font-medium text-gray-900">APAC</span>
+                <span className="text-xs text-gray-600">
+                  (Asia Pacific)
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-purple-600">
+                {regionDeliverables.APAC.toLocaleString()}
+              </span>
+            </div>
+
+            {/* LATAM */}
+            <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg border border-amber-200">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                <span className="text-sm font-medium text-gray-900">LATAM</span>
+                <span className="text-xs text-gray-600">
+                  (Latin America)
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-amber-600">
+                {regionDeliverables.LATAM.toLocaleString()}
+              </span>
+            </div>
+
+            {/* MENA */}
+            <div className="flex items-center justify-between p-3 bg-rose-50 rounded-lg border border-rose-200">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-rose-500"></div>
+                <span className="text-sm font-medium text-gray-900">MENA</span>
+                <span className="text-xs text-gray-600">
+                  (Middle East, North Africa)
+                </span>
+              </div>
+              <span className="text-sm font-semibold text-rose-600">
+                {regionDeliverables.MENA.toLocaleString()}
+              </span>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-200 pt-3 mt-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-semibold text-gray-900">
+                Total Deliverables
+              </span>
+              <span className="text-lg font-bold text-orange-600">
+                {totalDeliverables.toLocaleString()}
+              </span>
+            </div>
+          </div>
+
+          <p className="text-xs text-gray-600 italic">
+            These are estimated counts. Final deliverables will be calculated after campaign submission.
+          </p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 export default function CampaignRequestForm() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
