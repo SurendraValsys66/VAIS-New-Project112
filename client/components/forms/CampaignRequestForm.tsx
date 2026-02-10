@@ -600,7 +600,7 @@ function DeliverablesDialog({
         <div className="space-y-6 py-4">
           {/* Database Reach Tabs */}
           <Tabs defaultValue="job-level" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-gray-100 p-1 rounded-lg">
+            <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
               <TabsTrigger value="job-level" className="text-sm font-medium">
                 Job Level (Total count {jobLevelTotal})
               </TabsTrigger>
@@ -609,6 +609,9 @@ function DeliverablesDialog({
                 className="text-sm font-medium"
               >
                 Employee Size (Total count {employeeSizeTotal})
+              </TabsTrigger>
+              <TabsTrigger value="assets" className="text-sm font-medium">
+                Assets ({selectedAssets.length})
               </TabsTrigger>
             </TabsList>
 
