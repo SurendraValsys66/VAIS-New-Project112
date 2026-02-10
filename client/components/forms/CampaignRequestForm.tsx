@@ -1477,19 +1477,6 @@ export default function CampaignRequestForm() {
         jobLevels={form.watch("jobLevels")}
         geolocations={form.watch("geolocations")}
         industries={form.watch("industries")}
-        onAddToAssets={() => {
-          const emailAsset: SelectedAsset = {
-            id: "email-gen",
-            type: "email",
-            name: "AI Email Generator",
-            description:
-              "Generate personalized emails with AI-powered subject lines and body copy",
-            config: {},
-          };
-          if (!selectedAssets.some((a) => a.id === emailAsset.id)) {
-            setSelectedAssets([...selectedAssets, emailAsset]);
-          }
-        }}
       />
     </Form>
   );
