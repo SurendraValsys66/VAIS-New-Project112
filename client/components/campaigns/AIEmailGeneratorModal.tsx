@@ -338,29 +338,13 @@ export function AIEmailGeneratorModal({
             </Tabs>
           </div>
 
-          {/* Info Box */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-            <p className="text-xs text-amber-800">
-              <span className="font-semibold">💡 Pro Tip:</span> These are
-              sample variations. When you add this asset to your campaign, the
-              AI will generate personalized versions for each recipient based on
-              their profile and your selected targeting criteria.
-            </p>
-          </div>
         </div>
 
         {/* Footer Actions */}
         <div className="flex gap-3 justify-end border-t pt-4">
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">Close</Button>
           </DialogClose>
-          <Button
-            onClick={handleAddAssets}
-            className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
-          >
-            <Mail className="w-4 h-4" />
-            Add to Campaign
-          </Button>
         </div>
       </DialogContent>
     </Dialog>
