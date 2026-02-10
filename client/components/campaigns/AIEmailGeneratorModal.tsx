@@ -15,6 +15,7 @@ import {
   Check,
   Mail,
   Sparkles,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
