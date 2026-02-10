@@ -1462,25 +1462,6 @@ export default function CampaignRequestForm() {
                     )}
                   </button>
                 </div>
-
-                {/* Selected Assets Summary */}
-                {selectedAssets.length > 0 && (
-                  <div className="mt-3 bg-blue-50 border border-blue-200 rounded p-3">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs text-blue-800 font-medium">
-                        {selectedAssets.length} asset
-                        {selectedAssets.length !== 1 ? "s" : ""} selected
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedAssets([])}
-                        className="text-xs text-blue-600 hover:text-blue-800 underline"
-                      >
-                        Clear all
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>
