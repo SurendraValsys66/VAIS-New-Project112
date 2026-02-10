@@ -170,6 +170,21 @@ export function ChatGPTLikeInput({
         )}
       >
         <div className="flex items-end gap-2 p-3">
+          {/* Paperclip Icon - Left Side */}
+          <button
+            onClick={handlePaperclipClick}
+            disabled={isLoading || disabled}
+            className={cn(
+              "p-2 rounded-lg transition-colors flex-shrink-0",
+              isLoading || disabled
+                ? "text-gray-300 cursor-not-allowed"
+                : "text-gray-500 hover:text-blue-600 hover:bg-blue-50"
+            )}
+            title="Attach files (.pdf, .docx, .doc, .ppt, .pptx, .csv, .xls, .xlsx - Max 5MB)"
+          >
+            <Paperclip className="w-5 h-5" />
+          </button>
+
           {/* Textarea */}
           <div className="flex-1 flex items-center">
             <textarea
@@ -193,50 +208,32 @@ export function ChatGPTLikeInput({
             />
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Paperclip Icon */}
-            <button
-              onClick={handlePaperclipClick}
-              disabled={isLoading || disabled}
-              className={cn(
-                "p-2 rounded-lg transition-colors",
-                isLoading || disabled
-                  ? "text-gray-300 cursor-not-allowed"
-                  : "text-gray-500 hover:text-blue-600 hover:bg-blue-50"
-              )}
-              title="Attach files (.csv, .xlsx, .xls, .pdf, .docx - Max 5MB)"
-            >
-              <Paperclip className="w-5 h-5" />
-            </button>
-
-            {/* Submit Button */}
-            <button
-              onClick={() => {
-                if (value.trim() && !isLoading && !disabled) {
-                  onSubmit();
-                }
-              }}
-              disabled={!value.trim() || isLoading || disabled}
-              className={cn(
-                "p-2 rounded-lg transition-all duration-200 flex-shrink-0",
-                value.trim() && !isLoading && !disabled
-                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg"
-                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
-              )}
-              title={
-                value.trim()
-                  ? "Send (or Ctrl+Enter / Cmd+Enter)"
-                  : "Enter a prompt to send"
+          {/* Submit Button - Right Side */}
+          <button
+            onClick={() => {
+              if (value.trim() && !isLoading && !disabled) {
+                onSubmit();
               }
-            >
-              {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <Send className="w-5 h-5" />
-              )}
-            </button>
-          </div>
+            }}
+            disabled={!value.trim() || isLoading || disabled}
+            className={cn(
+              "p-2 rounded-lg transition-all duration-200 flex-shrink-0",
+              value.trim() && !isLoading && !disabled
+                ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg"
+                : "bg-gray-100 text-gray-400 cursor-not-allowed"
+            )}
+            title={
+              value.trim()
+                ? "Send (or Ctrl+Enter / Cmd+Enter)"
+                : "Enter a prompt to send"
+            }
+          >
+            {isLoading ? (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <Send className="w-5 h-5" />
+            )}
+          </button>
         </div>
       </div>
 
