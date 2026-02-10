@@ -258,31 +258,96 @@ ${campaignName}`,
               {/* Uploaded Files List */}
               {uploadedFiles.length > 0 && (
                 <div className="space-y-2">
-                  <p className="text-xs font-semibold text-gray-700">
+                  <p className="text-xs font-semibold text-gray-700 mb-3">
                     Attached Files ({uploadedFiles.length})
                   </p>
-                  {uploadedFiles.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-200"
-                    >
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-gray-600" />
-                        <span className="text-xs text-gray-700">
-                          {file.name}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          ({(file.size / 1024 / 1024).toFixed(2)} MB)
-                        </span>
-                      </div>
-                      <button
-                        onClick={() => removeFile(index)}
-                        className="text-gray-400 hover:text-red-600"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
+                  <div className="flex flex-wrap gap-3">
+                    {uploadedFiles.map((file, index) => {
+                      // Determine file type and icon color
+                      const getFileTypeInfo = (fileName: string) => {
+                        const ext = fileName.split(".").pop()?.toLowerCase() || "";
+                        if (["pdf"].includes(ext))
+                          return {
+                            type: "PDF",
+                            bgColor: "bg-red-100",
+                            textColor: "text-red-600",
+                          };
+                        if (["doc", "docx"].includes(ext))
+                          return {
+                            type: "Document",
+                            bgColor: "bg-blue-100",
+                            textColor: "text-blue-600",
+                          };
+                        if (["ppt", "pptx"].includes(ext))
+                          return {
+                            type: "Presentation",
+                            bgColor: "bg-orange-100",
+                            textColor: "text-orange-600",
+                          };
+                        if (["jpg", "jpeg", "png", "gif"].includes(ext))
+                          return {
+                            type: "Image",
+                            bgColor: "bg-green-100",
+                            textColor: "text-green-600",
+                          };
+                        if (["xls", "xlsx", "csv"].includes(ext))
+                          return {
+                            type: "Spreadsheet",
+                            bgColor: "bg-green-100",
+                            textColor: "text-green-600",
+                          };
+                        return {
+                          type: "File",
+                          bgColor: "bg-gray-100",
+                          textColor: "text-gray-600",
+                        };
+                      };
+
+                      const fileInfo = getFileTypeInfo(file.name);
+                      const displayName =
+                        file.name.length > 25
+                          ? file.name.substring(0, 22) + "..."
+                          : file.name;
+
+                      return (
+                        <div
+                          key={index}
+                          className={cn(
+                            "flex items-center gap-3 px-3 py-2 rounded-lg border border-gray-200 bg-white",
+                            "hover:shadow-md transition-shadow"
+                          )}
+                        >
+                          {/* File Icon Box */}
+                          <div
+                            className={cn(
+                              "w-10 h-10 rounded flex items-center justify-center flex-shrink-0",
+                              fileInfo.bgColor
+                            )}
+                          >
+                            <FileText className={cn("w-5 h-5", fileInfo.textColor)} />
+                          </div>
+
+                          {/* File Info */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium text-gray-900 truncate">
+                              {displayName}
+                            </p>
+                            <p className="text-xs text-gray-600">
+                              {fileInfo.type}
+                            </p>
+                          </div>
+
+                          {/* Remove Button */}
+                          <button
+                            onClick={() => removeFile(index)}
+                            className="text-gray-400 hover:text-red-600 flex-shrink-0 ml-2"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
 
