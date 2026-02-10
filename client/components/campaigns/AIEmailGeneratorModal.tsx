@@ -10,14 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Copy,
-  Sparkles,
-  X,
-  FileText,
-  Paperclip,
-  Check,
-} from "lucide-react";
+import { Copy, Sparkles, X, FileText, Paperclip, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AIEmailGeneratorModalProps {
@@ -219,7 +212,7 @@ ${campaignName}`,
   const updateEmailField = (
     emailId: string,
     field: "subject" | "body",
-    value: string
+    value: string,
   ) => {
     setEditingEmails((prev) => ({
       ...prev,
@@ -363,13 +356,19 @@ ${campaignName}`,
               <Tabs defaultValue="professional" className="w-full">
                 {/* Tabs List */}
                 <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
-                  <TabsTrigger value="professional" className="text-sm font-medium">
+                  <TabsTrigger
+                    value="professional"
+                    className="text-sm font-medium"
+                  >
                     Professional
                   </TabsTrigger>
                   <TabsTrigger value="friendly" className="text-sm font-medium">
                     Friendly
                   </TabsTrigger>
-                  <TabsTrigger value="data-driven" className="text-sm font-medium">
+                  <TabsTrigger
+                    value="data-driven"
+                    className="text-sm font-medium"
+                  >
                     Data-Driven
                   </TabsTrigger>
                 </TabsList>
@@ -405,7 +404,7 @@ ${campaignName}`,
                       <div
                         className={cn(
                           "border-2 rounded-lg overflow-hidden",
-                          colors.border
+                          colors.border,
                         )}
                       >
                         {/* Header */}
@@ -414,7 +413,7 @@ ${campaignName}`,
                             <div
                               className={cn(
                                 "inline-block px-2 py-1 rounded text-xs font-medium mb-2",
-                                colors.badge
+                                colors.badge,
                               )}
                             >
                               {emailMode.title}
@@ -433,7 +432,7 @@ ${campaignName}`,
                               "gap-1 ml-2",
                               copiedId === emailMode.id
                                 ? "bg-green-600 hover:bg-green-700"
-                                : ""
+                                : "",
                             )}
                           >
                             {copiedId === emailMode.id ? (
@@ -464,7 +463,7 @@ ${campaignName}`,
                                 updateEmailField(
                                   emailMode.id,
                                   "subject",
-                                  e.target.value
+                                  e.target.value,
                                 )
                               }
                               className="w-full text-sm font-medium text-gray-900 border-0 bg-transparent focus:outline-none border-b-2 border-gray-200 hover:border-gray-300 focus:border-blue-500 pb-1"
@@ -482,7 +481,7 @@ ${campaignName}`,
                                 updateEmailField(
                                   emailMode.id,
                                   "body",
-                                  e.target.value
+                                  e.target.value,
                                 )
                               }
                               className="min-h-32 text-sm resize-none border border-gray-200 rounded focus:border-blue-500"

@@ -235,9 +235,9 @@ function AssetConfigDialog({
               <div className="flex gap-2">
                 <Info className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
                 <p className="text-xs text-blue-800">
-                  The AI Email Generator will create personalized emails for your
-                  campaign with subject lines, body copy, and CTAs optimized for
-                  your selected audiences.
+                  The AI Email Generator will create personalized emails for
+                  your campaign with subject lines, body copy, and CTAs
+                  optimized for your selected audiences.
                 </p>
               </div>
             </div>
@@ -513,9 +513,7 @@ export function AssetSelector({
                     {asset.name}
                   </p>
                   {asset.config && Object.keys(asset.config).length > 0 && (
-                    <p className="text-xs text-gray-600 mt-1">
-                      ✓ Configured
-                    </p>
+                    <p className="text-xs text-gray-600 mt-1">✓ Configured</p>
                   )}
                 </div>
                 <div className="flex items-center gap-2">

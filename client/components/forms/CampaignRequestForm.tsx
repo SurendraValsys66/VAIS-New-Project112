@@ -1290,7 +1290,10 @@ export default function CampaignRequestForm() {
                   </button>
 
                   {/* Landing Page Dropdown Button */}
-                  <Popover open={landingPageDropdownOpen} onOpenChange={setLandingPageDropdownOpen}>
+                  <Popover
+                    open={landingPageDropdownOpen}
+                    onOpenChange={setLandingPageDropdownOpen}
+                  >
                     <PopoverTrigger asChild>
                       <button
                         type="button"
@@ -1317,8 +1320,12 @@ export default function CampaignRequestForm() {
                         >
                           <Mail className="w-4 h-4 text-purple-600" />
                           <div className="flex-1">
-                            <p className="font-medium text-gray-900">Email Template Builder</p>
-                            <p className="text-xs text-gray-600">Design custom email templates</p>
+                            <p className="font-medium text-gray-900">
+                              Email Template Builder
+                            </p>
+                            <p className="text-xs text-gray-600">
+                              Design custom email templates
+                            </p>
                           </div>
                         </button>
 
@@ -1333,8 +1340,12 @@ export default function CampaignRequestForm() {
                         >
                           <Globe className="w-4 h-4 text-purple-600" />
                           <div className="flex-1">
-                            <p className="font-medium text-gray-900">Landing Page Builder</p>
-                            <p className="text-xs text-gray-600">Create conversion-optimized pages</p>
+                            <p className="font-medium text-gray-900">
+                              Landing Page Builder
+                            </p>
+                            <p className="text-xs text-gray-600">
+                              Create conversion-optimized pages
+                            </p>
                           </div>
                         </button>
                       </div>
