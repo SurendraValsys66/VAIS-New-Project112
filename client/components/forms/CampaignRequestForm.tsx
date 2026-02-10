@@ -35,6 +35,7 @@ import {
   Briefcase,
   Download,
   ChevronRight,
+  ChevronDown,
   Mail,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
