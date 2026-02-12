@@ -230,106 +230,59 @@ export default function RecommendedCampaignType({
   }
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900">
-          Recommended Campaign Type
-        </h3>
-        <p className="text-sm text-gray-600 mt-1">
-          Based on your selected deliverables and volume, here's the campaign
-          strategy that best fits your goals.
-        </p>
-      </div>
+    <div className="space-y-2">
+      {/* Compact Header */}
+      <h3 className="text-sm font-semibold text-gray-900">
+        Recommended Campaign Type
+      </h3>
 
-      {/* Divider */}
-      <div className="border-t border-gray-200" />
-
-      {/* Main Recommendation Card */}
+      {/* Minimal Recommendation Card */}
       <Card
         className={cn(
-          "border-2 shadow-md hover:shadow-lg transition-shadow",
+          "border shadow-sm hover:shadow-md transition-shadow",
           recommendation.borderColor,
         )}
       >
-        <CardHeader className={recommendation.bgColor}>
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className={cn("p-2 rounded-lg bg-white", "bg-opacity-80")}>
-                <div className={recommendation.color}>{recommendation.icon}</div>
-              </div>
+        <CardHeader className={cn("py-3 px-4", recommendation.bgColor)}>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <div className={recommendation.color}>{recommendation.icon}</div>
               <div className="flex-1">
-                <CardTitle className={cn("text-2xl font-bold", recommendation.color)}>
+                <CardTitle className={cn("text-base font-bold", recommendation.color)}>
                   {recommendation.name}
                 </CardTitle>
-                <CardDescription className="mt-1 text-sm text-gray-700">
-                  {recommendation.description}
-                </CardDescription>
               </div>
             </div>
-            <Badge className={cn("h-fit whitespace-nowrap", recommendation.bgColor, recommendation.color, "border-current")}>
+            <Badge className={cn("h-fit whitespace-nowrap text-xs", recommendation.bgColor, recommendation.color, "border-current")}>
               <CheckCircle2 className="w-3 h-3 mr-1" />
               Recommended
             </Badge>
           </div>
         </CardHeader>
 
-        <CardContent className="pt-6">
-          <div className="space-y-5">
-            {/* Why This Is Recommended */}
+        <CardContent className="py-3 px-4">
+          <div className="space-y-2">
+            {/* Compact Why This Is Recommended */}
             <div>
-              <h4 className="font-semibold text-gray-900 text-sm mb-3 flex items-center gap-2">
-                <Lightbulb className="w-4 h-4 text-amber-500" />
-                Why This Is Recommended
-              </h4>
-              <ul className="space-y-2">
-                {recommendation.reasons.map((reason, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                    <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+              <ul className="space-y-1">
+                {recommendation.reasons.slice(0, 2).map((reason, index) => (
+                  <li key={index} className="flex items-start gap-2 text-xs text-gray-700">
+                    <ArrowRight className="w-3 h-3 text-gray-400 flex-shrink-0 mt-0.5" />
                     <span>{reason}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Expected Outcome */}
-            <div className={cn("p-4 rounded-lg border", recommendation.bgColor, recommendation.borderColor)}>
-              <p className="text-xs font-semibold text-gray-600 mb-1">
-                Expected Outcome
-              </p>
-              <p className={cn("text-sm font-medium", recommendation.color)}>
+            {/* Compact Expected Outcome */}
+            <div className={cn("p-2 rounded border text-xs", recommendation.bgColor, recommendation.borderColor)}>
+              <p className={cn("font-medium", recommendation.color)}>
                 {recommendation.expectedOutcome}
               </p>
             </div>
-
-            {/* Secondary Recommendation */}
-            {recommendation.secondary && (
-              <div className="pt-2 border-t border-gray-200">
-                <p className="text-xs font-semibold text-gray-600 mb-2">
-                  Optional Secondary Recommendation
-                </p>
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                  <p className="text-sm font-medium text-gray-900">
-                    {recommendation.secondary.type}
-                  </p>
-                  <p className="text-xs text-gray-600 mt-1">
-                    {recommendation.secondary.reason}
-                  </p>
-                </div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
-
-      {/* Info Box */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <p className="text-xs text-blue-800 leading-relaxed">
-          <span className="font-semibold">💡 Pro Tip:</span> This recommendation
-          is based on your current selections. Adjust your targeting criteria or
-          asset types to see different campaign strategy suggestions.
-        </p>
-      </div>
     </div>
   );
 }
