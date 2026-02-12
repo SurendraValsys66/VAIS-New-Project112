@@ -64,6 +64,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { AssetSelector, SelectedAsset } from "../campaigns/AssetSelector";
 import { AIEmailGeneratorModal } from "../campaigns/AIEmailGeneratorModal";
+import RecommendedCampaignType from "../campaigns/RecommendedCampaignType";
 
 // Form validation schema
 const campaignFormSchema = z.object({
@@ -409,6 +410,7 @@ interface DeliverablesDialogProps {
   revenue: string[];
   userHasFullPermission?: boolean;
   isFormValid?: boolean;
+  selectedAssets?: SelectedAsset[];
 }
 
 type CampaignStatus = "pending" | "accepted" | "declined";
@@ -424,6 +426,7 @@ function DeliverablesDialog({
   revenue,
   userHasFullPermission = true,
   isFormValid = true,
+  selectedAssets = [],
 }: DeliverablesDialogProps) {
   const [open, setOpen] = useState(false);
   const [campaignStatus, setCampaignStatus] =
@@ -816,6 +819,18 @@ function DeliverablesDialog({
               </div>
             </TabsContent>
           </Tabs>
+
+          {/* Recommended Campaign Type Section */}
+          <RecommendedCampaignType
+            jobTitles={jobTitles}
+            jobFunctions={jobFunctions}
+            jobLevels={jobLevels}
+            geolocations={geolocations}
+            employeeSize={employeeSize}
+            industries={industries}
+            totalDeliverables={totalDeliverables}
+            campaignAssets={selectedAssets}
+          />
 
           {/* Campaign Actions */}
           {userHasFullPermission && (
@@ -1266,6 +1281,7 @@ export default function CampaignRequestForm() {
                   employeeSize={form.watch("employeeSize")}
                   revenue={form.watch("revenue")}
                   isFormValid={isFormValid()}
+                  selectedAssets={selectedAssets}
                 />
               </div>
 
