@@ -514,78 +514,145 @@ export default function IntentSignalPopover({
             {/* Scrollable Content Section */}
             <div className="flex-1 overflow-auto p-5">
               <div className="space-y-6">
-                {/* Topics Section */}
+                {/* Topics Section - Enhanced Table */}
                 <div>
-                  <h3 className="text-sm font-bold text-gray-900 mb-2.5 flex items-center space-x-2">
+                  <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center space-x-2">
                     <div className="w-1 h-4 bg-gradient-to-b from-valasys-orange to-orange-500 rounded-full"></div>
                     <span>Top Topics</span>
-                    <span className="text-xs font-normal text-gray-500">
-                      (Click to view specific intent trend)
-                    </span>
                   </h3>
-                  <div className="space-y-1.5">
-                    {data.relatedTopics.slice(0, 3).map((topic, index) => {
-                      const scores = [65, 63, 58];
-                      const score =
-                        scores[index] || Math.floor(Math.random() * 40 + 60);
-                      const growthTrends = ["+24%", "+18%", "+12%"];
-                      const isSelected = selectedTopic === topic;
-                      return (
-                        <div
-                          key={index}
-                          onClick={() =>
-                            setSelectedTopic(isSelected ? undefined : topic)
-                          }
-                          className={cn(
-                            "flex items-center justify-between p-2.5 border rounded-lg transition-all duration-300 group cursor-pointer",
-                            isSelected
-                              ? "bg-orange-50 border-valasys-orange bg-gradient-to-r from-orange-50 to-orange-100 shadow-md"
-                              : "bg-gray-50 border-gray-200 hover:border-valasys-orange hover:bg-orange-50",
-                          )}
-                        >
-                          <div className="flex items-center space-x-2 flex-1 min-w-0">
-                            <div
+
+                  {/* Topics Table */}
+                  <div className="overflow-x-auto border border-gray-200 rounded-lg bg-white">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="bg-gray-50 border-b border-gray-200">
+                          <th className="px-3 py-2.5 text-left font-semibold text-gray-700">Topic</th>
+                          <th className="px-3 py-2.5 text-center font-semibold text-gray-700 whitespace-nowrap">
+                            <div className="flex items-center justify-center gap-1">Score</div>
+                          </th>
+                          <th className="px-3 py-2.5 text-left font-semibold text-gray-700 whitespace-nowrap">B2B Personas</th>
+                          <th className="px-3 py-2.5 text-left font-semibold text-gray-700 whitespace-nowrap">Top Metros</th>
+                          <th className="px-3 py-2.5 text-left font-semibold text-gray-700 whitespace-nowrap">Domain Origin</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.relatedTopics.slice(0, 3).map((topic, index) => {
+                          const topicData = [
+                            {
+                              name: "Fair Value Measurement",
+                              score: 61,
+                              personas: ["CFO", "Controller"],
+                              metros: ["New York, NY", "San Francisco, CA"],
+                              domains: ["Financial Services", "Accounting"],
+                            },
+                            {
+                              name: "Goodwill Accounting",
+                              score: 73,
+                              personas: ["Financial Analyst", "M&A Manager"],
+                              metros: ["Boston, MA", "Los Angeles, CA"],
+                              domains: ["Banking", "Private Equity"],
+                            },
+                            {
+                              name: "Revenue Recognition",
+                              score: 58,
+                              personas: ["Revenue Analyst", "Compliance Officer"],
+                              metros: ["Seattle, WA", "Denver, CO"],
+                              domains: ["SaaS", "Technology"],
+                            },
+                          ];
+
+                          const currentTopic = topicData[index] || {
+                            name: topic,
+                            score: Math.floor(Math.random() * 40 + 60),
+                            personas: ["Manager", "Analyst"],
+                            metros: ["New York, NY"],
+                            domains: ["Technology"],
+                          };
+
+                          const isSelected = selectedTopic === topic;
+                          const getScoreBadgeColor = (score: number) => {
+                            if (score >= 70) return "bg-green-100 text-green-800";
+                            if (score >= 50) return "bg-yellow-100 text-yellow-800";
+                            return "bg-red-100 text-red-800";
+                          };
+
+                          return (
+                            <tr
+                              key={index}
+                              onClick={() =>
+                                setSelectedTopic(isSelected ? undefined : topic)
+                              }
                               className={cn(
-                                "w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all",
-                                isSelected
-                                  ? "bg-valasys-orange w-2 h-2"
-                                  : "bg-valasys-orange",
-                              )}
-                            ></div>
-                            <span
-                              className={cn(
-                                "text-xs font-medium truncate transition-colors",
-                                isSelected
-                                  ? "text-valasys-orange font-semibold"
-                                  : "text-gray-700",
+                                "border-b border-gray-100 hover:bg-orange-50 transition-colors cursor-pointer group",
+                                isSelected ? "bg-orange-50" : "bg-white"
                               )}
                             >
-                              {topic}
-                            </span>
-                            {isSelected && (
-                              <span className="text-xs text-valasys-orange ml-1">
-                                ✓
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center space-x-2 flex-shrink-0 ml-2">
-                            <Badge
-                              className={cn(
-                                "font-semibold text-xs px-2 transition-colors",
-                                isSelected
-                                  ? "bg-valasys-orange text-white border border-valasys-orange"
-                                  : "bg-yellow-100 text-yellow-800 border border-yellow-200",
-                              )}
-                            >
-                              {score}
-                            </Badge>
-                            <span className="text-xs font-semibold text-emerald-600 w-10 text-right">
-                              {growthTrends[index]}
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
+                              <td className="px-3 py-2.5">
+                                <div className="flex items-center gap-2">
+                                  <div className={cn(
+                                    "w-1.5 h-1.5 rounded-full flex-shrink-0 transition-all",
+                                    isSelected ? "bg-valasys-orange w-2 h-2" : "bg-valasys-orange"
+                                  )} />
+                                  <span className={cn(
+                                    "font-medium transition-colors",
+                                    isSelected ? "text-valasys-orange font-semibold" : "text-gray-900"
+                                  )}>
+                                    {currentTopic.name}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="px-3 py-2.5 text-center">
+                                <Badge className={cn("font-bold text-xs", getScoreBadgeColor(currentTopic.score))}>
+                                  {currentTopic.score}
+                                </Badge>
+                              </td>
+                              <td className="px-3 py-2.5">
+                                <div className="flex flex-wrap gap-1">
+                                  {currentTopic.personas.slice(0, 1).map((persona, i) => (
+                                    <Badge key={i} variant="secondary" className="bg-blue-100 text-blue-800 text-xs font-normal">
+                                      {persona}
+                                    </Badge>
+                                  ))}
+                                  {currentTopic.personas.length > 1 && (
+                                    <Badge variant="secondary" className="bg-blue-50 text-blue-700 text-xs font-normal">
+                                      +{currentTopic.personas.length - 1}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="px-3 py-2.5">
+                                <div className="flex flex-wrap gap-1">
+                                  {currentTopic.metros.slice(0, 1).map((metro, i) => (
+                                    <Badge key={i} variant="secondary" className="bg-green-100 text-green-800 text-xs font-normal">
+                                      {metro}
+                                    </Badge>
+                                  ))}
+                                  {currentTopic.metros.length > 1 && (
+                                    <Badge variant="secondary" className="bg-green-50 text-green-700 text-xs font-normal">
+                                      +{currentTopic.metros.length - 1}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="px-3 py-2.5">
+                                <div className="flex flex-wrap gap-1">
+                                  {currentTopic.domains.slice(0, 1).map((domain, i) => (
+                                    <Badge key={i} variant="secondary" className="bg-purple-100 text-purple-800 text-xs font-normal">
+                                      {domain}
+                                    </Badge>
+                                  ))}
+                                  {currentTopic.domains.length > 1 && (
+                                    <Badge variant="secondary" className="bg-purple-50 text-purple-700 text-xs font-normal">
+                                      +{currentTopic.domains.length - 1}
+                                    </Badge>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
