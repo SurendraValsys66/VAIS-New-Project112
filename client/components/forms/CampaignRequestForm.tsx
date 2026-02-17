@@ -433,7 +433,32 @@ function DeliverablesDialog({
     Japan: "APAC",
   };
 
-  // Calculate Job Level total count (MOVED UP)
+  // Limit geolocations to top 5
+  const selectedGeolocations = geolocations.slice(0, 5);
+
+  // Use only selected job levels (no limit)
+  const selectedJobLevels =
+    jobLevels.length > 0
+      ? jobLevels
+      : ["C-Level", "Vice President", "Director", "Manager", "Staff"];
+
+  // Generate Database Reach data by Job Level
+  const generateJobLevelData = () => {
+    const data: { [key: string]: { [key: string]: number } } = {};
+
+    selectedJobLevels.forEach((level) => {
+      data[level] = {};
+      selectedGeolocations.forEach((geo) => {
+        data[level][geo] = Math.floor(Math.random() * 50) + 30;
+      });
+    });
+
+    return data;
+  };
+
+  const jobLevelData = generateJobLevelData();
+
+  // Calculate Job Level total count
   const jobLevelTotal = selectedJobLevels.reduce((sum, level) => {
     const levelTotal = selectedGeolocations.reduce(
       (geoSum, geo) => geoSum + (jobLevelData[level]?.[geo] || 0),
@@ -609,31 +634,6 @@ function DeliverablesDialog({
 
   const totalMonthlyCS = getRowTotal(monthlyDeliverablesData.CS);
   const totalDeliverables = totalMonthlyCS;
-
-  // Limit geolocations to top 5
-  const selectedGeolocations = geolocations.slice(0, 5);
-
-  // Use only selected job levels (no limit)
-  const selectedJobLevels =
-    jobLevels.length > 0
-      ? jobLevels
-      : ["C-Level", "Vice President", "Director", "Manager", "Staff"];
-
-  // Generate Database Reach data by Job Level
-  const generateJobLevelData = () => {
-    const data: { [key: string]: { [key: string]: number } } = {};
-
-    selectedJobLevels.forEach((level) => {
-      data[level] = {};
-      selectedGeolocations.forEach((geo) => {
-        data[level][geo] = Math.floor(Math.random() * 50) + 30;
-      });
-    });
-
-    return data;
-  };
-
-  const jobLevelData = generateJobLevelData();
 
   // Use only selected employee sizes (no limit)
   const selectedEmployeeSizeList =
