@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
+  Bot,
+  Target,
   Search,
-  BarChart3,
-  Download,
-  Settings,
+  Megaphone,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,29 +17,29 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    name: "Home",
+    name: "Dashboard",
     href: "/",
     icon: LayoutDashboard,
   },
   {
-    name: "Search",
+    name: "VAIS",
+    href: "/build-vais",
+    icon: Bot,
+  },
+  {
+    name: "ABM/LAL",
+    href: "/abm-lal",
+    icon: Target,
+  },
+  {
+    name: "Prospect",
     href: "/find-prospect",
     icon: Search,
   },
   {
-    name: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-  },
-  {
-    name: "History",
-    href: "/my-downloads",
-    icon: Download,
-  },
-  {
-    name: "Profile",
-    href: "/settings",
-    icon: Settings,
+    name: "Campaign",
+    href: "/build-my-campaign",
+    icon: Megaphone,
   },
 ];
 
