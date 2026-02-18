@@ -114,10 +114,10 @@ export default function MobileBottomNav() {
 
       <nav className="fixed bottom-0 left-0 right-0 lg:hidden z-40">
         <div className="relative px-4 pt-8 pb-4">
-          {/* White Curved Bar */}
+          {/* Themed Curved Bar */}
           <div
             className={cn(
-              "relative bg-white rounded-3xl shadow-xl backdrop-blur-sm transition-all duration-300 overflow-visible border border-valasys-gray-100",
+              "relative bg-valasys-gray-50 rounded-3xl shadow-lg transition-all duration-300 overflow-visible border border-valasys-gray-200",
               isAnimating ? "mobile-nav-animate" : "",
             )}
           >
